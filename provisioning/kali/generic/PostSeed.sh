@@ -33,5 +33,4 @@ sudo git clone https://github.com/joaomatosf/jexboss.git /opt/jexboss
 cd /opt/jexboss
 sudo python3 -m venv /opt/jexboss
 sudo /opt/jexboss/bin/python /opt/jexboss/bin/pip install -r requires.txt
-sudo ln -s /opt/Terrapin-Scanner/Terrapin-Scanner /usr/bin/Terrapin-Scanner
 sudo ln -s /opt/jexboss/jexboss.py /usr/bin/jexboss
