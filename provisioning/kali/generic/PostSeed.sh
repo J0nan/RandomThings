@@ -1,10 +1,12 @@
 #!/bin/bash
 # Author: J0nan
 # Installs and configures multiple hacking tools
-# It requieres:
-#     - Go
-#     - Python 3.12
-#     - python3.12-venv
+
+# Install requiered packages
+sudo apt install -y python3.12-venv
+sudo apt install -y golang-go
+sudo apt install -y docker.io
+sudo apt install -y google-android-platform-tools-installer
 
 # Testssl.sh - https://github.com/drwetter/testssl.sh
 sudo git clone https://github.com/drwetter/testssl.sh.git /opt/testssl.sh
