@@ -1,0 +1,22 @@
+{
+    "markdownlint.config": {
+        "MD033": {
+            "allowed_elements": [
+                "div",
+                "center",
+                "img",
+                "figcaption",
+                "tablecaption",
+                "code",
+                "h1",
+                "h3",
+            ]
+        },
+        "MD010": false,
+        "MD041": false,
+        "MD024": false,
+    },
+    "cSpell.words": [
+        "Keymap"
+    ],
+}
