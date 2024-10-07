@@ -2,39 +2,53 @@
 
 ## Table of Content <!-- omit in toc -->
 
-- [SetUp](#setup)
-  - [Usage](#usage)
-    - [Requirements](#requirements)
-    - [Execution](#execution)
-  - [Configuration it does](#configuration-it-does)
-  - [Tools it installs](#tools-it-installs)
+- [Usage](#usage)
+- [What it does](#what-it-does)
+  - [Preseed.cfg](#preseedcfg)
+  - [PostSeed.sh](#postseedsh)
+    - [Configuration](#configuration)
+    - [Tools](#tools)
 - [Update](#update)
-  - [Usage](#usage-1)
 
-## SetUp
+## Usage
 
-### Usage
-
-#### Requirements
-
-It requires to have installed and configured a Linux machine which is based on Debian, it is recommended to use Kali Linux. This guide is focused in Kali Linux.
+This guide is focused in Kali Linux using VirtualBox
 
 1. [Download](https://www.kali.org/get-kali/#kali-installer-images) Kali Linux.
-2. Create a new VM.
-3. Configure the Hardware to 4096 MB of RAM, 3 CPUs processors and 100 GB of Hard Drive (it can be higher, depending on your hardware).
+2. Create a new Virtual Machine.
+3. Configure the Hardware, I recommend a minimum of 4096 MB of RAM, 3 CPUs processors and 100 GB of Hard Drive (it can be higher, depending on your hardware).
 4. Before booting the VM, change the display setting to use at least 32 MB of Video memory in order to be able to rescale on bigger screen and with higher resolutions.
-5. `url=http://vpaste.net/Uded0 language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=`
-5. `url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=`
+5. Boot the VirtualMachine.
+6. Once booted go to Install and press the `Tab` key instead of the `Enter`, this will show a command line at the bottom, as shown in the next picture.
+   <center> <img id="Imagen-1" src="photos/Install-Kali.png" alt="Installer image" width="70%"> </center>
+7. Once the command line is shown add the following changing the language, country, locale and keymap if needed (if you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) like <http://vpaste.net/>)
 
-#### Execution
+```shell
+url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=
+```
 
-### Configuration it does
+<center> <img id="Imagen-2" src="photos/Install-Kali-With-Command.png" alt="Installer image 2" width="70%"> </center>
 
-### Tools it installs
+8. After entering the command press `Enter` and wait until Kali is installed.
 
+## What it does
+
+### Preseed.cfg
+
+### PostSeed.sh
+
+This script is executed by the installer after performing all the configurations and updating all the packages already install on the OS. The script does some [configuration](#configuration) and install some useful [tools](#tools).
+
+#### Configuration
+
+- Removes the transparency of the terminal.
+
+#### Tools
+
+- python3.12-venv
+- golang-go
 - docker
 - google-android-platform-tools-installer
-- python3.12-venv
 - [Testssl.sh](https://github.com/drwetter/testssl.sh)
 - [Aquatone](https://github.com/firefart/aquatone)
 - [ssh-audit](https://github.com/jtesta/ssh-audit)
@@ -43,4 +57,4 @@ It requires to have installed and configured a Linux machine which is based on D
 
 ## Update
 
-### Usage
+Work in progress...
