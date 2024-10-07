@@ -1,6 +1,8 @@
 #!/bin/bash
 # Author: J0nan
-# Installs and configures Kali
+# Configures Kali and install some useful tools
+
+DEBIAN_FRONTEND=noninteractive
 
 # Configuration of the terminal 
 mkdir -p /home/kali/.config/qterminal.org

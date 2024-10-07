@@ -15,6 +15,8 @@
         "MD010": false,
         "MD041": false,
         "MD024": false,
+        "MD031": false,
+        "MD032": false,
     },
     "cSpell.words": [
         "Keymap"
