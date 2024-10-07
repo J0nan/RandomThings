@@ -20,7 +20,9 @@ This guide is focused in Kali Linux using VirtualBox
 4. Before booting the VM, change the display setting to use at least 32 MB of Video memory in order to be able to rescale on bigger screen and with higher resolutions.
 5. Boot the VirtualMachine.
 6. Once booted go to Install and press the `Tab` key instead of the `Enter`, this will show a command line at the bottom, as shown in the next picture.
-   <center> <img id="Imagen-1" src="photos/Install-Kali.png" alt="Installer image" width="70%"> </center>
+
+<center> <img id="Imagen-1" src="photos/Install-Kali.png" alt="Installer image" width="70%"> </center>
+
 7. Once the command line is shown add the following changing the language, country, locale and keymap if needed (if you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) like <http://vpaste.net/>)
 
 ```shell
