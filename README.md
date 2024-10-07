@@ -10,6 +10,4 @@
 
 #### Generic
 
-Kali configuration for unattended installations with some extra tools for day to day use.
-
-[Info](https://github.com/J0nan/RandomThings/tree/main/provisioning/kali/generic)
+Kali configuration for unattended installations with some extra tools for day to day use. [Info.](https://github.com/J0nan/RandomThings/tree/main/provisioning/kali/generic)
