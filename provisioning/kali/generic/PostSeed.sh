@@ -1,6 +1,12 @@
 #!/bin/bash
 # Author: J0nan
-# Installs and configures multiple hacking tools
+# Installs and configures Kali
+
+# Configuration of the terminal 
+mkdir -p /home/kali/.config/qterminal.org
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
+chown -R kali:kali /home/kali/.config/qterminal.org
 
 # Install requiered packages
 apt install -y python3.12-venv
