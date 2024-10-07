@@ -23,7 +23,7 @@ This guide is focused in Kali Linux using VirtualBox
 
 <center> <img id="Imagen-1" src="photos/Install-Kali.png" alt="Installer image" width="70%"> </center>
 
-7. Once the command line is shown add the following changing the language, country, locale and keymap if needed (if you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) like <http://vpaste.net/>)
+7. Once the command line is shown add the following changing the language, country, locale and keymap if needed (if you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) like <http://vpaste.net/> to copy and paste the content of the preseed.cfg file and type a shorter url instead of the one from Github)
 
 ```shell
 url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=
@@ -36,6 +36,8 @@ url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisi
 ## What it does
 
 ### Preseed.cfg
+
+ToDo
 
 ### PostSeed.sh
 
