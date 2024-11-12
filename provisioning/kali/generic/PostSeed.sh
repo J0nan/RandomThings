@@ -44,7 +44,7 @@ apt install docker.io -y
 systemctl disable docker.service
 systemctl disable docker.socket
 
-# Snap
+# Snapd
 apt install snapd -y
 systemctl enable snapd --now
 ln -s /var/lib/snapd/snap /usr/bin/snap
@@ -140,13 +140,6 @@ echo -e "${Blue}[*] Installing onesixtyone${ColorOff}"
 git clone https://github.com/trailofbits/onesixtyone.git /opt/onesixtyone
 gcc -o onesixtyone /opt/onesixtyone/onesixtyone.c
 
-# ikeforce
-echo -e "${Blue}[*] Installing ikeforce${ColorOff}"
-#git clone https://github.com/SpiderLabs/ikeforce.git /opt/ikeforce
-#python3 -m venv /opt/ikeforce
-#/opt/ikeforce/bin/python /opt/ikeforce/bin/pip install pyip pycrypto pyopenssl
-#ln -s /opt/ikeforce/ikeforce.py /usr/bin/ikeforce
-
 # ike-trans
 echo -e "${Blue}[*] Installing ike-trans${ColorOff}"
 git clone https://github.com/actuated/ike-trans /opt/ike-trans
@@ -192,10 +185,6 @@ apt install sslscan -y
 # Jadx
 echo -e "${Blue}[*] Installing jadx${ColorOff}"
 apt install jadx -y
-
-# ADB
-#echo -e "${Blue}[*] Installing ADB Tools${ColorOff}"
-#sudo apt install android-tools-adb -y
 
 # Google Android Tools
 echo -e "${Blue}[*] Installing Google Android Tools${ColorOff}"
