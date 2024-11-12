@@ -4,7 +4,7 @@
 
 This installs and configures a kali with:
 
-- [General Purpose Tools]
+- [General Purpose Tools](./generic/README.md#general-purpose)
 - [Web applications tools](./generic/README.md#web-applications-tools)
 - [Infrastructure tools](./generic/README.md#infrastructure-tools)
 - [Mobile Tools](./generic/README.md#mobile-tools)
