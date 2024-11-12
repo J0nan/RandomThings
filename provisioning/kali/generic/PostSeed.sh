@@ -212,7 +212,6 @@ ln -s /opt/airgeddon/airgeddon.sh /usr/bin/airgeddon
 # COOK
 echo -e "${Blue}[*] Installing COOK${ColorOff}"
 go install -v github.com/glitchedgitz/cook/v2/cmd/cook@latest
-ln -s $HOME/go/bin/cook /usr/bin/cook
 
 #
 source ~/.zshrc
