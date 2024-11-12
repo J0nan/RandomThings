@@ -8,6 +8,12 @@
   - [PostSeed.sh](#postseedsh)
     - [Configuration](#configuration)
     - [Tools](#tools)
+      - [General Purpose](#general-purpose)
+      - [Web applications tools](#web-applications-tools)
+      - [Infrastructure tools](#infrastructure-tools)
+      - [Mobile Tools](#mobile-tools)
+      - [WiFi tools](#wifi-tools)
+      - [Cracking](#cracking)
 - [Update](#update)
 
 ## Usage
@@ -23,7 +29,7 @@ This guide is focused in Kali Linux using VirtualBox
 
 <center> <img id="Imagen-1" src="photos/Install-Kali.png" alt="Installer image" width="70%"> </center>
 
-7. Once the command line is shown add the following changing the language, country, locale and keymap if needed (if you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) like <http://vpaste.net/> to copy and paste the content of the preseed.cfg file and type a shorter url instead of the one from Github)
+1. Once the command line is shown add the following changing the language, country, locale and keymap if needed. If you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) to copy and paste the content of the preseed.cfg file and type a shorter url instead of the one from Github. Also, you can use [ClickPaste](https://github.com/Collective-Software/ClickPaste) to paste into the Virtual Machine.
 
 ```shell
 url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=
@@ -49,15 +55,58 @@ This script is executed by the installer after performing all the configurations
 
 #### Tools
 
-- python3.12-venv
+##### General Purpose
+
+- python3.12 & python3.12-venv
+- git
 - golang-go
 - docker
-- google-android-platform-tools-installer
+- snapd
+- [SecList](https://github.com/danielmiessler/SecLists)
+- dnsutils
+
+##### Web applications tools
+
+- [Nuclei](https://github.com/projectdiscovery/nuclei)
+- [Interactsh](https://github.com/projectdiscovery/interactsh)
 - [Testssl.sh](https://github.com/drwetter/testssl.sh)
+- [wafw00f](https://github.com/EnableSecurity/wafw00f)
+- [httpx](https://github.com/projectdiscovery/httpx)
+- dirb
+- gobuster
+- [Sublist3r](https://github.com/aboul3la/Sublist3r)
+- [Subfinder](https://github.com/projectdiscovery/subfinder)
+- arjun
+- ffuf
+- [Bypass-403](https://github.com/iamj0ker/bypass-403)
+- [Corsy](https://github.com/s0md3v/Corsy)
+- [GraphQLmap](https://github.com/swisskyrepo/GraphQLmap)
+- eyewitness
 - [Aquatone](https://github.com/firefart/aquatone)
+
+##### Infrastructure tools
+
+- [Onesixtyone](https://github.com/trailofbits/onesixtyone)
+- dnsrecon
+- [Domain Analyzer](https://github.com/eldraco/domain_analyzer)
+- dnsmasq
 - [ssh-audit](https://github.com/jtesta/ssh-audit)
 - [Terrapin-Scanner](https://github.com/RUB-NDS/Terrapin-Scanner)
 - [JexBoss](https://github.com/joaomatosf/jexboss)
+- sslscan
+
+##### Mobile Tools
+
+- jadx
+- google-android-platform-tools-installer
+
+##### WiFi tools
+
+- [Airgeddon](https://github.com/v1s1t0r1sh3r3/airgeddon)
+
+##### Cracking
+
+- [COOK](https://github.com/glitchedgitz/cook)
 
 ## Update
 
