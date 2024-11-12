@@ -5,6 +5,7 @@
 - [Usage](#usage)
 - [What it does](#what-it-does)
   - [Preseed.cfg](#preseedcfg)
+    - [Credentials](#credentials)
   - [PostSeed.sh](#postseedsh)
     - [Configuration](#configuration)
     - [Tools](#tools)
@@ -43,7 +44,10 @@ url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisi
 
 ### Preseed.cfg
 
-ToDo
+#### Credentials
+
+User: `kali`
+Password: `kali`
 
 ### PostSeed.sh
 
