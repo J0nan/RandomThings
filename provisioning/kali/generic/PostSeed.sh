@@ -140,11 +140,6 @@ echo -e "${Blue}[*] Installing onesixtyone${ColorOff}"
 git clone https://github.com/trailofbits/onesixtyone.git /opt/onesixtyone
 gcc -o onesixtyone /opt/onesixtyone/onesixtyone.c
 
-# ike-trans
-echo -e "${Blue}[*] Installing ike-trans${ColorOff}"
-git clone https://github.com/actuated/ike-trans /opt/ike-trans
-ln -s /opt/ike-trans/ike-trans.sh /usr/bin/ike-trans
-
 # dnsrecon
 echo -e "${Blue}[*] Installing dnsrecon${ColorOff}"
 apt install dnsrecon
@@ -201,6 +196,3 @@ ln -s /opt/airgeddon/airgeddon.sh /usr/bin/airgeddon
 # COOK
 echo -e "${Blue}[*] Installing COOK${ColorOff}"
 go install -v github.com/glitchedgitz/cook/v2/cmd/cook@latest
-
-#
-source ~/.zshrc
