@@ -17,14 +17,14 @@ ColorOff='\033[0m'		# Text Reset
 # Setup
 # Configuration of the terminal 
 mkdir -p /home/kali/.config/qterminal.org
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal.ini
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal_bookmarks.xml
 chown -R kali:kali /home/kali/.config/qterminal.org
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
 mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
-wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-power-manager.xml
+wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/xfce4-power-manager.xml
 chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
 chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 

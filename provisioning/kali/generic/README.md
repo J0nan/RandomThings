@@ -33,7 +33,7 @@ This guide is focused in Kali Linux using VirtualBox
 1. Once the command line is shown add the following changing the language, country, locale and keymap if needed. If you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) to copy and paste the content of the preseed.cfg file and type a shorter url instead of the one from Github. Also, you can use [ClickPaste](https://github.com/Collective-Software/ClickPaste) to paste into the Virtual Machine.
 
 ```shell
-url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=
+url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=
 ```
 
 <center> <img id="Imagen-2" src="photos/Install-Kali-With-Command.png" alt="Installer image 2" width="70%"> </center>
