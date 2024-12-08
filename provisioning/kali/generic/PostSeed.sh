@@ -78,13 +78,13 @@ ln -s /opt/testssl/testssl.sh /usr/bin/testssl
 
 # wafw00f
 echo -e "${Blue}[*] Installing wafw00f${ColorOff}"
-apt remove wafw00f
+apt remove wafw00f -y
 pipx install git+https://github.com/EnableSecurity/wafw00f.git
 ln -s /.local/share/pipx/venvs/wafw00f/bin/wafw00f /usr/bin/wafw00f
 
 # httpx
 echo -e "${Blue}[*] Installing httpx${ColorOff}"
-apt remove httpx
+apt remove httpx -y
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Dirb
