@@ -79,13 +79,12 @@ This script is executed by the installer after performing all the configurations
 - [httpx](https://github.com/projectdiscovery/httpx)
 - dirb
 - gobuster
-- [Sublist3r](https://github.com/aboul3la/Sublist3r)
+- [AMASS](https://github.com/owasp-amass/amass)
 - [Subfinder](https://github.com/projectdiscovery/subfinder)
 - arjun
 - ffuf
 - [Bypass-403](https://github.com/iamj0ker/bypass-403)
 - [Corsy](https://github.com/s0md3v/Corsy)
-- [GraphQLmap](https://github.com/swisskyrepo/GraphQLmap)
 - eyewitness
 - [Aquatone](https://github.com/firefart/aquatone)
 

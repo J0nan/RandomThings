@@ -39,7 +39,7 @@ apt install git -y
 
 # Go
 echo -e "${Blue}[*] Installing go and dependencies (BETA)${ColorOff}"
-apt-get install golang-go -y
+apt install golang-go -y
 go env -w GOBIN="/opt/go/bin"
 echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/opt/go/bin"' >>/etc/profile
 
@@ -47,6 +47,7 @@ echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/o
 apt install docker.io -y
 systemctl disable docker.service
 systemctl disable docker.socket
+usermod -a -G docker kali
 
 # Snapd
 apt install snapd -y
@@ -77,12 +78,14 @@ ln -s /opt/testssl/testssl.sh /usr/bin/testssl
 
 # wafw00f
 echo -e "${Blue}[*] Installing wafw00f${ColorOff}"
+apt remove wafw00f
 pipx install git+https://github.com/EnableSecurity/wafw00f.git
+ln -s /.local/share/pipx/venvs/wafw00f/bin/wafw00f /usr/bin/wafw00f
 
 # httpx
 echo -e "${Blue}[*] Installing httpx${ColorOff}"
-git clone https://github.com/projectdiscovery/httpx /opt/httpx
-ln -s $/opt/httpx /usr/bin/httpx
+apt remove httpx
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Dirb
 echo -e "${Blue}[*] Installing dirb${ColorOff}"
@@ -92,10 +95,9 @@ apt install dirb -y
 echo -e "${Blue}[*] Installing gobuster${ColorOff}"
 apt install gobuster -y
 
-# Sublist3r
-echo -e "${Blue}[*] Installing sublist3r${ColorOff}"
-git clone https://github.com/aboul3la/Sublist3r.git /opt/Sublist3r
-ln -s $/opt/Sublist3r /usr/bin/Sublist3r
+# AMASS
+echo -e "${Blue}[*] Installing AMASS${ColorOff}"
+apt install amass -y
 
 # Subfinder
 echo -e "${Blue}[*] Installing subfinder${ColorOff}"
@@ -104,6 +106,7 @@ go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 # Arjun
 echo -e "${Blue}[*] Installing arjun${ColorOff}"
 pipx install arjun
+ln -s /.local/share/pipx/venvs/arjun/bin/arjun /usr/bin/arjun
 
 # ffuf
 echo -e "${Blue}[*] Installing ffuf${ColorOff}"
@@ -120,13 +123,8 @@ echo -e "${Blue}[*] Installing Corsy${ColorOff}"
 git clone https://github.com/s0md3v/Corsy /opt/corsy
 python3 -m venv /opt/corsy
 /opt/corsy/bin/python /opt/corsy/bin/pip install -r /opt/corsy/requirements.txt
+chmod +x /opt/corsy/corsy.py
 ln -s /opt/corsy/corsy.py /usr/bin/corsy
-
-# GraphQLmap
-echo -e "${Blue}[*] Installing GraphQLmap${ColorOff}"
-git clone https://github.com/swisskyrepo/GraphQLmap.git /opt/GraphQLmap
-python /opt/GraphQLmap setup.py install
-ln -s /opt/GraphQLmap/graphqlmap /usr/bin/graphqlmap
 
 # EyeWitness
 echo -e "${Blue}[*] Installing EyeWitness${ColorOff}"
@@ -135,7 +133,7 @@ apt install eyewitness -y
 # Aquatone
 echo -e "${Blue}[*] Installing Aquatone${ColorOff}"
 git clone https://github.com/firefart/aquatone.git /opt/aquatone
-go build /opt/aquatone
+go build -buildvcs=false /opt/aquatone
 ln -s /opt/aquatone/aquatone /usr/bin/aquatone
 
 # Infrastructure tools
