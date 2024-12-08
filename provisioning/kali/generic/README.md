@@ -56,6 +56,7 @@ This script is executed by the installer after performing all the configurations
 #### Configuration
 
 - Removes the transparency of the terminal.
+- Disables power safe, blank screen and switch-off in the monitor
 
 #### Tools
 
@@ -64,7 +65,7 @@ This script is executed by the installer after performing all the configurations
 - python3.12 & python3.12-venv
 - git
 - golang-go
-- docker
+- docker (The services are disabled, use this to start them `systemctl start docker.service; systemctl start docker.socket`)
 - snapd
 - [SecList](https://github.com/danielmiessler/SecLists)
 - dnsutils
