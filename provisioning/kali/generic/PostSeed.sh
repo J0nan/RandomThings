@@ -139,8 +139,10 @@ ln -s /opt/aquatone/aquatone /usr/bin/aquatone
 # Infrastructure tools
 # Onesixtyone (SNMP)
 echo -e "${Blue}[*] Installing onesixtyone${ColorOff}"
+apt remove onesixtyone -y
 git clone https://github.com/trailofbits/onesixtyone.git /opt/onesixtyone
-gcc -o onesixtyone /opt/onesixtyone/onesixtyone.c
+gcc -o /opt/onesixtyone/onesixtyone /opt/onesixtyone/onesixtyone.c
+ln -s /opt/onesixtyone/onesixtyone /usr/bin/onesixtyone
 
 # dnsrecon
 echo -e "${Blue}[*] Installing dnsrecon${ColorOff}"
@@ -149,7 +151,10 @@ apt install dnsrecon
 # domain_analyzer
 echo -e "${Blue}[*] Installing domain_analyzer${ColorOff}"
 git clone https://github.com/eldraco/domain_analyzer.git /opt/domain_analyzer
-ln -s /opt/domain_analyzer /usr/bin/domain_analyzer
+python3 -m venv /opt/domain_analyzer
+/opt/domain_analyzer/bin/python /opt/domain_analyzer/bin/pip install -r /opt/domain_analyzer/requirements.txt
+chmod +x /opt/domain_analyzer/domain_analyzer.py
+ln -s /opt/domain_analyzer/domain_analyzer.py /usr/bin/domain_analyzer
 
 # dnsmasq
 echo -e "${Blue}[*] Installing dnsmasq${ColorOff}"
@@ -163,9 +168,7 @@ ln -s /opt/ssh-audit/ssh-audit.py /usr/bin/ssh-audit
 
 # Terrapin-Scanner
 echo -e "${Blue}[*] Installing Terrapin-Scanner${ColorOff}"
-git clone https://github.com/RUB-NDS/Terrapin-Scanner.git /opt/Terrapin-Scanner
-go build /opt/Terrapin-Scanner
-ln -s /opt/Terrapin-Scanner/Terrapin-Scanner /usr/bin/Terrapin-Scanner
+go install github.com/RUB-NDS/Terrapin-Scanner@latest
 
 # JexBoss
 echo -e "${Blue}[*] Installing JexBoss${ColorOff}"
@@ -197,4 +200,4 @@ ln -s /opt/airgeddon/airgeddon.sh /usr/bin/airgeddon
 # Cracking
 # COOK
 echo -e "${Blue}[*] Installing COOK${ColorOff}"
-go install -v github.com/glitchedgitz/cook/v2/cmd/cook@latest
+go install github.com/glitchedgitz/cook/v2/cmd/cook@latest
