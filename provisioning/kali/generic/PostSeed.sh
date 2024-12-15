@@ -65,11 +65,11 @@ apt install dnsutils -y
 # Web applications tools
 # Nuclei
 echo -e "${Blue}[*] Installing nuclei${ColorOff}"
-go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 
 # Interactsh
 echo -e "${Blue}[*] Installing interactsh${ColorOff}"
-go install -v github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest
+go install github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest
 
 # Testssl.sh
 echo -e "${Blue}[*] Installing testssl${ColorOff}"
@@ -85,7 +85,7 @@ ln -s /.local/share/pipx/venvs/wafw00f/bin/wafw00f /usr/bin/wafw00f
 # httpx
 echo -e "${Blue}[*] Installing httpx${ColorOff}"
 apt remove httpx -y
-go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+go install github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Dirb
 echo -e "${Blue}[*] Installing dirb${ColorOff}"
@@ -101,7 +101,7 @@ apt install amass -y
 
 # Subfinder
 echo -e "${Blue}[*] Installing subfinder${ColorOff}"
-go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
 # Arjun
 echo -e "${Blue}[*] Installing arjun${ColorOff}"
