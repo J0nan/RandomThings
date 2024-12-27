@@ -19,9 +19,12 @@ ColorOff='\033[0m'		# Text Reset
 mkdir -p /home/kali/.config/qterminal.org
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal.ini
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal_bookmarks.xml
+chown -R kali:kali /home/kali/.config/qterminal.org
 mkdir -p /usr/share/qtermwidget6/color-schemes
 cp /usr/share/qtermwidget5/color-schemes/* /usr/share/qtermwidget6/color-schemes/  # Copy the old terminal themes to the new
-chown -R kali:kali /home/kali/.config/qterminal.org
+wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/xfce4-desktop.xml
+chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
