@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 0.1.0
+# Version: 0.2.0
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -17,22 +17,22 @@ ColorOff='\033[0m'		# Text Reset
 # Setup
 # Configuration of the terminal 
 mkdir -p /home/kali/.config/qterminal.org
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal.ini
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal_bookmarks.xml
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
 chown -R kali:kali /home/kali/.config/qterminal.org
 # Copy the old terminal themes to the new qterminal
 mkdir -p /usr/share/qtermwidget6/color-schemes
 cp /usr/share/qtermwidget5/color-schemes/* /usr/share/qtermwidget6/color-schemes/
 # Setting the default kali wallpaper
 mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml 
-wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/xfce4-desktop.xml
+wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-desktop.xml
 chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
 mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
-wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/xfce4-power-manager.xml
+wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-power-manager.xml
 chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
 chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 
