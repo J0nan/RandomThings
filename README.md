@@ -1,6 +1,7 @@
 # RandomThings <!-- omit in toc -->
 
 - [Docker compose files](#docker-compose-files)
+  - [HandBreak](#handbreak)
   - [JDownloader 2](#jdownloader-2)
   - [qBittorrent](#qbittorrent)
 - [Provisioning](#provisioning)
@@ -8,6 +9,10 @@
     - [Generic](#generic)
 
 ## Docker compose files
+
+### HandBreak
+
+Docker compose that implements HandBreak. [Info.](./docker-compose%20files/HandBreak/)
 
 ### JDownloader 2
 
