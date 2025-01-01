@@ -1,13 +1,13 @@
 # RandomThings <!-- omit in toc -->
 
-- [Docker files](#docker-files)
+- [Docker compose files](#docker-compose-files)
   - [JDownloader 2](#jdownloader-2)
   - [qBittorrent](#qbittorrent)
 - [Provisioning](#provisioning)
   - [Kali Linux](#kali-linux)
     - [Generic](#generic)
 
-## Docker files
+## Docker compose files
 
 ### JDownloader 2
 
