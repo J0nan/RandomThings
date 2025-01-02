@@ -21,6 +21,11 @@ wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini ht
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
 chown -R kali:kali /home/kali/.config/qterminal.org
 
+# Setting the default kali wallpaper
+mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml 
+wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-desktop.xml
+chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
 mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
