@@ -1,0 +1,26 @@
+services:
+  mkvtoolnix:
+    image: jlesage/mkvtoolnix:latest
+    container_name: mkvtoolnix
+    environment:
+      - USER_ID=568
+      - GROUP_ID=568
+      - TZ=Europe/Berlin
+      - KEEP_APP_RUNNING=1
+      - DARK_MODE=1
+      - WEB_LISTENING_PORT=10236
+      - VNC_LISTENING_PORT=-1 # Disable, if needed put the port wanted, and change in the ports section
+      - VNC_PASSWORD=password # CHANGE ME
+      - AUTOMATED_CONVERSION=0
+    ports:
+      - 10236:10236 # mkvtoolnix WEB
+      # - 5800:5800 # mkvtoolnix VNC
+    volumes:
+      - /mnt/MKVTOOLNIX_DIR:/config  # This is where the application stores its configuration, states, log and any files needing persistency. # CHANGE ME
+      - /mnt/MKVTOOLNIX_OUT:/output  # This is where automatically converted video files are written. # CHANGE ME
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: "4g"
+    restart: unless-stopped
