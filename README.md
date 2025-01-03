@@ -1,6 +1,7 @@
 # RandomThings <!-- omit in toc -->
 
 - [Docker compose files](#docker-compose-files)
+  - [DeezSpot\_bot\_docker](#deezspot_bot_docker)
   - [HandBreak](#handbreak)
   - [JDownloader 2](#jdownloader-2)
   - [MKVToolNix](#mkvtoolnix)
@@ -11,6 +12,10 @@
     - [Generic](#generic)
 
 ## Docker compose files
+
+### DeezSpot_bot_docker
+
+Docker compose that implements DeezSpot_bot_docker. [Info.](./docker-compose%20files/DeezSpot_bot_docker/)
 
 ### HandBreak
 
