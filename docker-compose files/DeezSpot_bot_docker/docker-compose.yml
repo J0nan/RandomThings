@@ -14,6 +14,7 @@ services:
       - BOT_TOKEN=TELEGRAM_BOT_TOKEN # Telegram bot token # CHANGE ME
       - API_ID=TELEGRAM_API_ID # Telegram api id # CHANGE ME
       - API_HASH=TELEGRAM_API_HASH # Telegram api hash # CHANGE ME
+      - TZ=Europe/Berlin
     volumes:
       - /mnt/DB_DIR:/app/DB # CHANGE ME
       - /mnt/CREDENTIALS_DIR:/app/credentials # CHANGE ME
