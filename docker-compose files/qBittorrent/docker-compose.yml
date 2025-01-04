@@ -1,0 +1,50 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    cap_add:
+      - NET_ADMIN
+    environment:
+    # Documentation for different providers
+    # https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+      - VPN_SERVICE_PROVIDER=PROVIDER # CHANGE ME
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=OPENVPN USER # CHANGE ME
+      - OPENVPN_PASSWORD=OPENVPN PASSWORD # CHANGE ME
+      # Execute the following command to get the list of servers, remember to change the provider
+      # docker run --rm qmcgaw/gluetun format-servers -yourprovider
+      - SERVER_REGIONS=SERVER REGION OR LIST OF SERVER REGIONS # CHANGE ME
+    # volumes:
+    #   - /docker/appdata/gluetun:/config
+    ports:
+      - 10095:10095 # qbittorrent WebUI
+      - 6881:6881 # qbittorrent TCP
+      - 6881:6881/udp # qbittorrent UDP
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "2g"
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    network_mode: service:gluetun # This is what makes the app to connect to the VPN.
+    # Note that all ports were moved to the gluetun app.
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=Europe/Berlin
+      - WEBUI_PORT=10095
+      - TORRENTING_PORT=6881
+    volumes:
+      - /mnt/QBITTORRENT_DIR:/config   # Directory you want to save your QBittorrent config files # CHANGE ME
+      - /mnt/MEDIA_DIR:/download    # Directory of the downloads # CHANGE ME
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "4g"
+    restart: unless-stopped
+    depends_on:
+      gluetun:
+        condition: service_healthy
