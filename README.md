@@ -6,6 +6,7 @@
   - [JDownloader 2](#jdownloader-2)
   - [MKVToolNix](#mkvtoolnix)
   - [qBittorrent](#qbittorrent)
+  - [Telethon Downloader](#telethon-downloader)
   - [TriliumNext Notes](#triliumnext-notes)
 - [Provisioning](#provisioning)
   - [Kali Linux](#kali-linux)
@@ -32,6 +33,10 @@ Docker compose that implements MKVToolNix. [Info.](./docker-compose%20files/MKVT
 ### qBittorrent
 
 Docker compose that implements qBittorrent docker with VPN. [Info.](./docker-compose%20files/qBittorrent)
+
+### Telethon Downloader
+
+Docker compose that implements Telethon Downloader. [Info.](./docker-compose%20files/Telethon%20Downloader/)
 
 ### TriliumNext Notes
 
