@@ -3,12 +3,12 @@ services:
     image: jsavargas/telethon_downloader:latest
     container_name: telethon_downloader
     environment:
-      - PUID:586
-      - PGID:586
-      - TG_AUTHORIZED_USER_ID:USER_CHAT_ID # telegram chat_id authorized # CHANGE ME
-      - TG_API_ID:TELEGRAM_API_ID # telegram API key generated at ´Generating Telegram API keys´ # CHANGE ME
-      - TG_API_HASH:TELEGRAM_API_HASH # telegram API hash generated at ´Generating Telegram API keys´ # CHANGE ME
-      - TG_BOT_TOKEN:TELEGRAM_BOT_TOKEN # telegram BOT token generated at ´Creating a Telegram Bot´ # CHANGE ME
+      - PUID=586
+      - PGID=586
+      - TG_AUTHORIZED_USER_ID=USER_CHAT_ID # telegram chat_id authorized # CHANGE ME
+      - TG_API_ID=TELEGRAM_API_ID # telegram API key generated at ´Generating Telegram API keys´ # CHANGE ME
+      - TG_API_HASH=TELEGRAM_API_HASH # telegram API hash generated at ´Generating Telegram API keys´ # CHANGE ME
+      - TG_BOT_TOKEN=TELEGRAM_BOT_TOKEN # telegram BOT token generated at ´Creating a Telegram Bot´ # CHANGE ME
       - TZ=Europe/Berlin
     volumes:
       - /mnt/TELETHON_CONFIG:/config # Path where configuration files, pending downloads, and recent downloads are stored. # CHANGE ME
