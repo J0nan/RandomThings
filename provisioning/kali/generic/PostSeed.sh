@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 0.2.0
+# Version: 0.2.1
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -22,9 +22,9 @@ wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookma
 chown -R kali:kali /home/kali/.config/qterminal.org
 
 # Setting the default kali wallpaper
-mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml 
-wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-desktop.xml
-chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+#mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml 
+#wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-desktop.xml
+#chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
@@ -134,12 +134,6 @@ ln -s /opt/corsy/corsy.py /usr/bin/corsy
 # EyeWitness
 echo -e "${Blue}[*] Installing EyeWitness${ColorOff}"
 apt install eyewitness -y
-
-# Aquatone
-echo -e "${Blue}[*] Installing Aquatone${ColorOff}"
-git clone https://github.com/firefart/aquatone.git /opt/aquatone
-go build -buildvcs=false /opt/aquatone
-ln -s /opt/aquatone/aquatone /usr/bin/aquatone
 
 # Infrastructure tools
 # Onesixtyone (SNMP)
