@@ -71,6 +71,7 @@ This script is executed by the installer after performing all the configurations
 - snapd
 - [SecList](https://github.com/danielmiessler/SecLists)
 - dnsutils
+- [DBeaver](https://dbeaver.io/)
 
 ##### Web applications tools
 
@@ -88,7 +89,6 @@ This script is executed by the installer after performing all the configurations
 - [Bypass-403](https://github.com/iamj0ker/bypass-403)
 - [Corsy](https://github.com/s0md3v/Corsy)
 - eyewitness
-- [Aquatone](https://github.com/firefart/aquatone)
 
 ##### Infrastructure tools
 
