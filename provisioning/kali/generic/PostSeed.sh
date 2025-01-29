@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 0.2.1
+# Version: 0.2.2
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -20,11 +20,6 @@ mkdir -p /home/kali/.config/qterminal.org
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
 chown -R kali:kali /home/kali/.config/qterminal.org
-
-# Setting the default kali wallpaper
-#mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml 
-#wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-desktop.xml
-#chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
@@ -66,6 +61,11 @@ git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
 # Dig and Nslookup
 echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
 apt install dnsutils -y
+
+# Dbeaver
+wget --no-check-certificate -O /home/kali/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+apt install /home/kali/Downloads/dbeaber-ce.deb -y
+rm /home/kali/Downloads/dbeaber-ce.deb
 
 # Web applications tools
 # Nuclei
