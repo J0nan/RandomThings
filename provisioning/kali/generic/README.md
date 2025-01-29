@@ -30,7 +30,7 @@ This guide is focused in Kali Linux using VirtualBox
 
 <center> <img id="Imagen-1" src="photos/Install-Kali.png" alt="Installer image" width="70%"> </center>
 
-1. Once the command line is shown add the following changing the language, country, locale and keymap if needed. If you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) to copy and paste the content of the preseed.cfg file and type a shorter url instead of the one from Github. Also, you can use [ClickPaste](https://github.com/Collective-Software/ClickPaste) to paste into the Virtual Machine.
+7. Once the command line is shown add the following changing the language, country, locale and keymap if needed. If you are not able to copy and paste, you can use any [Pastebin Services](https://github.com/lorien/awesome-pastebins) to copy and paste the content of the preseed.cfg file and type a shorter url instead of the one from Github. Also, you can use [ClickPaste](https://github.com/Collective-Software/ClickPaste) to paste into the Virtual Machine.
 
 ```shell
 url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=
@@ -39,6 +39,12 @@ url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/prov
 <center> <img id="Imagen-2" src="photos/Install-Kali-With-Command.png" alt="Installer image 2" width="70%"> </center>
 
 8. After entering the command press `Enter` and wait until Kali is installed.
+
+Sometimes for some reason, the cursor glitches out, if that happens just restart lightdm with:
+
+```bash
+sudo systemctl restart lightdm
+```
 
 ## What it does
 
@@ -57,8 +63,6 @@ This script is executed by the installer after performing all the configurations
 
 - Removes the transparency of the terminal.
 - Disables power safe, blank screen and switch-off in the monitor
-- Moves the theme files from qterminal 5 to qterminal 6
-- Changed the desktop wallpaper to the Kali default one
 
 #### Tools
 
