@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 0.2.2
+# Version: 0.2.3
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -43,10 +43,19 @@ apt install golang-go -y
 go env -w GOBIN="/opt/go/bin"
 echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/opt/go/bin"' >>/etc/profile
 
-# Docker
-apt install docker.io -y
-systemctl disable docker.service
-systemctl disable docker.socket
+# Docker + docker compose
+apt remove docker.io docker-compose -y
+apt update
+apt install ca-certificates curl -y
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "bookworm") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 usermod -a -G docker kali
 
 # Snapd
