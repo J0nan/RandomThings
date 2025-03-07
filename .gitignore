@@ -5,3 +5,4 @@ docker-compose files/MKVToolNix/docker-compose_good.yml
 docker-compose files/TriliumNext Notes/docker-compose_good.yml
 docker-compose files/DeezSpot_bot_docker/docker-compose_good.yml
 docker-compose files/Telethon Downloader/docker-compose_good.yml
+docker-compose files/Stirling-PDF/docker-compose_good.yml
