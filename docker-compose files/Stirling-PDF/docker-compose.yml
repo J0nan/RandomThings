@@ -1,0 +1,21 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest-fat
+    container_name: stirling-pdf
+    environment:
+      - LANGS=es_ES,en_US # CHANGE ME
+      - DOCKER_ENABLE_SECURITY=true
+      - SECURITY_ENABLE_LOGIN=true
+      - APP_LOCALE=es-ES # CHANGE ME
+    ports:
+      - '11156:8080'
+    volumes:
+      - /mnt/STIRLINGPDF_DIR/trainingData:/usr/share/tessdata # Required for extra OCR languages # CHANGE ME
+      - /mnt/STIRLINGPDF_DIR/extraConfigs:/configs  # CHANGE ME
+      - /mnt/STIRLINGPDF_DIR/logs:/logs/  # CHANGE ME
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: "4g"
+    restart: unless-stopped
