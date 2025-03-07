@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 0.2.0
+# Version: 0.2.3
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -20,14 +20,6 @@ mkdir -p /home/kali/.config/qterminal.org
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
 wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
 chown -R kali:kali /home/kali/.config/qterminal.org
-# Copy the old terminal themes to the new qterminal
-mkdir -p /usr/share/qtermwidget6/color-schemes
-cp /usr/share/qtermwidget5/color-schemes/* /usr/share/qtermwidget6/color-schemes/
-# Setting the default kali wallpaper
-mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml 
-wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-desktop.xml
-chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
@@ -51,8 +43,19 @@ apt install golang-go -y
 go env -w GOBIN="/opt/go/bin"
 echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/opt/go/bin"' >>/etc/profile
 
-# Docker
-apt install docker.io -y
+# Docker + docker compose
+apt remove docker.io docker-compose -y
+apt update
+apt install ca-certificates curl -y
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "bookworm") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 systemctl disable docker.service
 systemctl disable docker.socket
 usermod -a -G docker kali
@@ -69,6 +72,12 @@ git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
 # Dig and Nslookup
 echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
 apt install dnsutils -y
+
+# Dbeaver
+mkdir -p /home/kali/Downloads
+wget --no-check-certificate -O /home/kali/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+apt install /home/kali/Downloads/dbeaber-ce.deb -y
+rm /home/kali/Downloads/dbeaber-ce.deb
 
 # Web applications tools
 # Nuclei
@@ -137,12 +146,6 @@ ln -s /opt/corsy/corsy.py /usr/bin/corsy
 # EyeWitness
 echo -e "${Blue}[*] Installing EyeWitness${ColorOff}"
 apt install eyewitness -y
-
-# Aquatone
-echo -e "${Blue}[*] Installing Aquatone${ColorOff}"
-git clone https://github.com/firefart/aquatone.git /opt/aquatone
-go build -buildvcs=false /opt/aquatone
-ln -s /opt/aquatone/aquatone /usr/bin/aquatone
 
 # Infrastructure tools
 # Onesixtyone (SNMP)
