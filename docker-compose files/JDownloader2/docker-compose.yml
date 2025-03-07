@@ -6,6 +6,7 @@ services:
     environment:
     # Documentation for different providers
     # https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+      - DOT=off
       - VPN_SERVICE_PROVIDER=PROVIDER # CHANGE ME
       - VPN_TYPE=openvpn
       - OPENVPN_USER=OPENVPN USER # CHANGE ME

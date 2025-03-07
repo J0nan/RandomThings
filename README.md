@@ -8,6 +8,7 @@
   - [qBittorrent](#qbittorrent)
   - [Telethon Downloader](#telethon-downloader)
   - [TriliumNext Notes](#triliumnext-notes)
+  - [Stirling-PDF](#stirling-pdf)
 - [Provisioning](#provisioning)
   - [Kali Linux](#kali-linux)
     - [Generic](#generic)
@@ -41,6 +42,10 @@ Docker compose that implements Telethon Downloader. [Info.](./docker-compose%20f
 ### TriliumNext Notes
 
 Docker compose that implements TriliumNext Notes. [Info.](./docker-compose%20files/TriliumNext%20Notes/)
+
+### Stirling-PDF
+
+Docker compose that implements Stirling-PDF. [Info.](./docker-compose%20files/Stirling-PDF/)
 
 ## Provisioning
 
