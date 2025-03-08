@@ -19,6 +19,12 @@ services:
     ports:
       - 10054:10054 # jdownloader2 WEB
       # - 10056:10056 # jdownloader2 VNC, if needed put the port in the jdownloader2 service
+    healthcheck:
+      test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
+      interval: 20s
+      timeout: 20s
+      retries: 10
+      start_period: 30s
     deploy:
       resources:
         limits:
