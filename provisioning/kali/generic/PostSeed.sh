@@ -82,7 +82,7 @@ rm /home/kali/Downloads/dbeaber-ce.deb
 # Web applications tools
 # Nuclei
 echo -e "${Blue}[*] Installing nuclei${ColorOff}"
-go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
 
 # Interactsh
 echo -e "${Blue}[*] Installing interactsh${ColorOff}"
