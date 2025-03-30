@@ -30,6 +30,7 @@ chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manage
 
 # Change hostname to kali due to vbox changing it
 hostnamectl set-hostname kali
+echo "kali" > /etc/hostname
 
 # General purpose tools
 # Python3 and PIP3
