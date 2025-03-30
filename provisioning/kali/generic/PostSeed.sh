@@ -28,6 +28,9 @@ wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-x
 chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
 chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 
+# Change hostname to kali due to vbox changing it
+hostnamectl set-hostname kali
+
 # General purpose tools
 # Python3 and PIP3
 echo -e "${Blue}[*] Installing python3 ${ColorOff}"
