@@ -31,7 +31,7 @@ chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manage
 # General purpose tools
 # Python3 and PIP3
 echo -e "${Blue}[*] Installing python3 ${ColorOff}"
-apt install python3.12 python3.12-venv -y
+apt install python3 python3-venv -y
 
 # git
 echo -e "${Blue}[*] Installing git${ColorOff}"
@@ -82,7 +82,7 @@ rm /home/kali/Downloads/dbeaber-ce.deb
 # Web applications tools
 # Nuclei
 echo -e "${Blue}[*] Installing nuclei${ColorOff}"
-go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
 
 # Interactsh
 echo -e "${Blue}[*] Installing interactsh${ColorOff}"

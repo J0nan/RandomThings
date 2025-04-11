@@ -1,0 +1,18 @@
+services:
+  triliumnext:
+    image: triliumnext/notes:latest
+    container_name: triliumnext
+    environment:
+      - USER_ID=568
+      - GROUP_ID=568
+      - TZ=Europe/Berlin
+    ports:
+      - 10156:8080 # triliumnext
+    volumes:
+      - /mnt/TRILIUMNEXT_DIR:/home/node/trilium-data  # CHANGE ME
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: "4g"
+    restart: unless-stopped

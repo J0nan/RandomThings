@@ -68,7 +68,7 @@ This script is executed by the installer after performing all the configurations
 
 ##### General Purpose
 
-- python3.12 & python3.12-venv
+- python3 & python3-venv
 - git
 - golang-go
 - docker (The services are disabled, use this to start them `systemctl start docker.service; systemctl start docker.socket`)
