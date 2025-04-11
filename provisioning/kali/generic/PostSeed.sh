@@ -28,6 +28,15 @@ wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-x
 chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
 chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 
+# Change hostname to kali due to vbox changing it
+current_hostname=$(hostname)
+if [ "$current_hostname" == "vbox" ]; then
+  echo "${Blue}[*] Current hostname is 'vbox'. Changing it to 'kali'...${ColorOff}"
+  hostnamectl set-hostname kali
+  sed -i 's/vbox/kali/g' /etc/hosts
+  echo "kali" | sudo tee /etc/hostname > /dev/null
+fi
+
 # General purpose tools
 # Python3 and PIP3
 echo -e "${Blue}[*] Installing python3 ${ColorOff}"
