@@ -1,0 +1,59 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    cap_add:
+      - NET_ADMIN
+    environment:
+    # Documentation for different providers
+    # https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+      - DOT=off
+      - VPN_SERVICE_PROVIDER=PROVIDER # CHANGE ME
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=OPENVPN USER # CHANGE ME
+      - OPENVPN_PASSWORD=OPENVPN PASSWORD # CHANGE ME
+      # Execute the following command to get the list of servers, remember to change the provider
+      # docker run --rm qmcgaw/gluetun format-servers -yourprovider
+      - SERVER_REGIONS=SERVER REGION OR LIST OF SERVER REGIONS # CHANGE ME
+    # volumes:
+    #   - /docker/appdata/gluetun:/config
+    ports:
+      - 10054:10054 # jdownloader2 WEB
+      # - 10056:10056 # jdownloader2 VNC, if needed put the port in the jdownloader2 service
+    healthcheck:
+      test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
+      interval: 20s
+      timeout: 20s
+      retries: 10
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "2g"
+
+  jdownloader2:
+    image: jlesage/jdownloader-2:latest
+    container_name: jdownloader2
+    network_mode: service:gluetun # This is what makes the app to connect to the VPN.
+    # Note that all ports were moved to the gluetun app.
+    environment:
+      - USER_ID=568
+      - GROUP_ID=568
+      - TZ=Europe/Berlin
+      - KEEP_APP_RUNNING=1
+      - DARK_MODE=1
+      - WEB_LISTENING_PORT=10054
+      - VNC_LISTENING_PORT=-1 # Disable, if needed put the port wanted, and change in the gluetun service
+      - VNC_PASSWORD=password # CHANGE ME
+    volumes:
+      - /mnt/JDOWNLOADER2_DIR:/config   # Directory you want to save your JDownloader2 config files # CHANGE ME
+      - /mnt/MEDIA_DIR:/output    # Directory of the downloads # CHANGE ME
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: "4g"
+    restart: unless-stopped
+    depends_on:
+      gluetun:
+        condition: service_healthy
