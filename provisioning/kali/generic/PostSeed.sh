@@ -83,10 +83,10 @@ echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
 apt install dnsutils -y
 
 # Dbeaver
-mkdir -p /home/kali/Downloads
-wget --no-check-certificate -O /home/kali/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
-apt install /home/kali/Downloads/dbeaber-ce.deb -y
-rm /home/kali/Downloads/dbeaber-ce.deb
+mkdir -p /tmp/Downloads
+wget --no-check-certificate -O /tmp/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+apt install /tmp/Downloads/dbeaber-ce.deb -y
+rm /tmp/Downloads/dbeaber-ce.deb
 
 # Web applications tools
 # Nuclei
