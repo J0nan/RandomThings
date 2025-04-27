@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 0.2.3
+# Version: 1.0.0
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -27,6 +27,15 @@ mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
 wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-power-manager.xml
 chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
 chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
+
+# Change hostname to kali due to vbox changing it
+current_hostname=$(hostname)
+if [ "$current_hostname" == "vbox" ]; then
+  echo "${Blue}[*] Current hostname is 'vbox'. Changing it to 'kali'...${ColorOff}"
+  hostnamectl set-hostname kali
+  sed -i 's/vbox/kali/g' /etc/hosts
+  echo "kali" | sudo tee /etc/hostname > /dev/null
+fi
 
 # General purpose tools
 # Python3 and PIP3
@@ -74,10 +83,10 @@ echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
 apt install dnsutils -y
 
 # Dbeaver
-mkdir -p /home/kali/Downloads
-wget --no-check-certificate -O /home/kali/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
-apt install /home/kali/Downloads/dbeaber-ce.deb -y
-rm /home/kali/Downloads/dbeaber-ce.deb
+mkdir -p /tmp/Downloads
+wget --no-check-certificate -O /tmp/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+apt install /tmp/Downloads/dbeaber-ce.deb -y
+rm /tmp/Downloads/dbeaber-ce.deb
 
 # Web applications tools
 # Nuclei
