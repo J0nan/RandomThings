@@ -57,8 +57,8 @@ Docker compose that implements Stirling-PDF. [Info.](./docker-compose%20files/St
 
 Kali configuration for unattended installations with some extra tools for day to day use. [Info.](./provisioning/kali/generic)
 
-### Web tools
+## Web tools
 
-#### CSRF
+### CSRF
 
 A simple HTML file that creates PoCs for performing CSRFs. [Info.](./web-tools/CSRF)
