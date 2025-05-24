@@ -110,7 +110,7 @@ ln -s /.local/share/pipx/venvs/wafw00f/bin/wafw00f /usr/bin/wafw00f
 
 # httpx
 echo -e "${Blue}[*] Installing httpx${ColorOff}"
-apt remove httpx -y
+rm /usr/bin/httpx
 go install github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Dirb
