@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 1.0.0
+# Version: 1.1.0
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
 
 # Source: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 # Regular Colors
-Red='\033[0;31m'		# Red
+Red='\033[0;31m'		  # Red
 Green='\033[0;32m'		# Green
 Yellow='\033[0;33m'		# Yellow
-Blue='\033[0;34m'		# Blue
+Blue='\033[0;34m'		  # Blue
 ColorOff='\033[0m'		# Text Reset
 
 # Setup
@@ -89,7 +89,7 @@ echo -e "${Blue}[*] Installing Dbeaver${ColorOff}"
 mkdir -p /tmp/Downloads
 wget --no-check-certificate -O /tmp/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
 apt install /tmp/Downloads/dbeaber-ce.deb -y
-rm /tmp/Downloads/dbeaber-ce.deb
+rm -r /tmp/Downloads
 
 # VSCodium
 echo -e "${Blue}[*] Installing VSCodium${ColorOff}"
@@ -100,9 +100,8 @@ curl -s -k https://api.github.com/repos/VSCodium/vscodium/releases/latest \
 | tr -d \" \
 | wget --no-check-certificate -O /tmp/Downloads/vscodium-amd64.deb -qi -
 apt install /tmp/Downloads/vscodium-amd64.deb -y
-rm /tmp/Downloads/vscodium-amd64.deb
-echo "alias code=codium" >> /home/kali/.bashrc
-echo "alias code=codium" >> /home/kali/.zshrc
+rm -r /tmp/Downloads
+ln -s $(which codium) /usr/bin/code
 
 # LibreOffice
 echo -e "${Blue}[*] Installing LibreOffice${ColorOff}"
@@ -239,6 +238,20 @@ apt install jadx -y
 # Google Android Tools
 echo -e "${Blue}[*] Installing Google Android Tools${ColorOff}"
 apt install google-android-platform-tools-installer -y
+
+# scrcpy
+echo -e "${Blue}[*] Installing scrcpy${ColorOff}"
+mkdir -p /opt/scrcpy
+curl -s -k https://api.github.com/repos/Genymobile/scrcpy/releases/latest \
+| grep "browser_download_url.*linux\-x86_64.*\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget --no-check-certificate -O /opt/scrcpy/scrcpy-linux.tar.gz -qi -
+tar -xzf /opt/scrcpy/scrcpy-linux.tar.gz -C /opt/scrcpy
+rm /opt/scrcpy/scrcpy-linux.tar.gz
+mv /opt/scrcpy/scrcpy-linux-x86_64*/* /opt/scrcpy
+rm -r /opt/scrcpy/scrcpy-linux-x86_64*
+ln -s /opt/scrcpy/scrcpy /usr/bin/scrcpy
 
 # WiFi tools
 # Airgeddon
