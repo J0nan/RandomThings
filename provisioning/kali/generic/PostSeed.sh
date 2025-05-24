@@ -102,6 +102,7 @@ curl -s -k https://api.github.com/repos/VSCodium/vscodium/releases/latest \
 apt install /tmp/Downloads/vscodium-amd64.deb -y
 rm /tmp/Downloads/vscodium-amd64.deb
 echo "alias code=codium" >> /home/kali/.bashrc
+echo "alias code=codium" >> /home/kali/.zshrc
 
 # Web applications tools
 # Nuclei
