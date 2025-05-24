@@ -53,6 +53,7 @@ go env -w GOBIN="/opt/go/bin"
 echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/opt/go/bin"' >>/etc/profile
 
 # Docker + docker compose
+echo -e "${Blue}[*] Installing Docker and docker compose${ColorOff}"
 apt remove docker.io docker-compose -y
 apt update
 apt install ca-certificates curl -y
@@ -70,6 +71,7 @@ systemctl disable docker.socket
 usermod -a -G docker kali
 
 # Snapd
+echo -e "${Blue}[*] Installing snapd${ColorOff}"
 apt install snapd -y
 systemctl enable snapd --now
 ln -s /var/lib/snapd/snap /usr/bin/snap
@@ -83,10 +85,23 @@ echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
 apt install dnsutils -y
 
 # Dbeaver
+echo -e "${Blue}[*] Installing Dbeaver${ColorOff}"
 mkdir -p /tmp/Downloads
 wget --no-check-certificate -O /tmp/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
 apt install /tmp/Downloads/dbeaber-ce.deb -y
 rm /tmp/Downloads/dbeaber-ce.deb
+
+# VSCodium
+echo -e "${Blue}[*] Installing VSCodium${ColorOff}"
+mkdir -p /tmp/Downloads
+curl -s -k https://api.github.com/repos/VSCodium/vscodium/releases/latest \
+| grep "browser_download_url.*amd64\.deb\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget --no-check-certificate -O /tmp/Downloads/vscodium-amd64.deb -qi -
+apt install /tmp/Downloads/vscodium-amd64.deb -y
+rm /tmp/Downloads/vscodium-amd64.deb
+echo "alias code=codium" >> /home/kali/.bashrc
 
 # Web applications tools
 # Nuclei
