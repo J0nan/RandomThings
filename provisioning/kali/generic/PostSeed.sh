@@ -104,6 +104,10 @@ rm /tmp/Downloads/vscodium-amd64.deb
 echo "alias code=codium" >> /home/kali/.bashrc
 echo "alias code=codium" >> /home/kali/.zshrc
 
+# LibreOffice
+echo -e "${Blue}[*] Installing LibreOffice${ColorOff}"
+apt install libreoffice -y
+
 # Web applications tools
 # Nuclei
 echo -e "${Blue}[*] Installing nuclei${ColorOff}"
@@ -171,6 +175,16 @@ ln -s /opt/corsy/corsy.py /usr/bin/corsy
 # EyeWitness
 echo -e "${Blue}[*] Installing EyeWitness${ColorOff}"
 apt install eyewitness -y
+
+# git-dumper
+echo -e "${Blue}[*] Installing git-dumper${ColorOff}"
+mkdir -p /opt/git-dumper
+curl -s -k https://api.github.com/repos/holly-hacker/git-dumper/releases/latest \
+| grep "browser_download_url.*linux\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget --no-check-certificate -O /opt/git-dumper/git-dumper -qi -
+ln -s /opt/git-dumper/git-dumper /usr/bin/git-dumper
 
 # Infrastructure tools
 # Onesixtyone (SNMP)
