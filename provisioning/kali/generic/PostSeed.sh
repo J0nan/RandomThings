@@ -105,6 +105,7 @@ ln -s $(which codium) /usr/bin/code
 
 # LibreOffice
 echo -e "${Blue}[*] Installing LibreOffice${ColorOff}"
+apt update
 apt install libreoffice -y
 
 # Web applications tools
