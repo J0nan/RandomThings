@@ -112,6 +112,7 @@ This script is executed by the installer after performing all the configurations
 
 - jadx
 - google-android-platform-tools-installer
+- [scrcpy](https://github.com/Genymobile/scrcpy)
 
 ##### WiFi tools
 
