@@ -77,7 +77,7 @@ This script is executed by the installer after performing all the configurations
 - dnsutils
 - [DBeaver](https://dbeaver.io/)
 - [VSCodium](https://github.com/VSCodium/vscodium) (Added an alias so it can be launch with `code` as well as with `codium`)
-- [LibreOffice](https://www.libreoffice.org/)
+<!-- - [LibreOffice](https://www.libreoffice.org/) -->
 
 ##### Web applications tools
 
