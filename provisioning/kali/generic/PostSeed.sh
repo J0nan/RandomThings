@@ -103,10 +103,11 @@ apt install /tmp/Downloads/vscodium-amd64.deb -y
 rm -r /tmp/Downloads
 ln -s $(which codium) /usr/bin/code
 
+## IT GETS THE POSTSEED STUCK FOR SOME UNKNOWN REASON
 # LibreOffice
-echo -e "${Blue}[*] Installing LibreOffice${ColorOff}"
-apt update
-apt install libreoffice -y
+# echo -e "${Blue}[*] Installing LibreOffice${ColorOff}"
+# apt update
+# apt install libreoffice -y
 
 # Web applications tools
 # Nuclei
