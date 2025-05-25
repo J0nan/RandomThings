@@ -185,6 +185,7 @@ curl -s -k https://api.github.com/repos/holly-hacker/git-dumper/releases/latest 
 | cut -d : -f 2,3 \
 | tr -d \" \
 | wget --no-check-certificate -O /opt/git-dumper/git-dumper -qi -
+chmod +x /opt/git-dumper/git-dumper
 ln -s /opt/git-dumper/git-dumper /usr/bin/git-dumper
 
 # Infrastructure tools
@@ -253,6 +254,7 @@ tar -xzf /opt/scrcpy/scrcpy-linux.tar.gz -C /opt/scrcpy
 rm /opt/scrcpy/scrcpy-linux.tar.gz
 mv /opt/scrcpy/scrcpy-linux-x86_64*/* /opt/scrcpy
 rm -r /opt/scrcpy/scrcpy-linux-x86_64*
+chmod +x /opt/scrcpy/scrcpy
 ln -s /opt/scrcpy/scrcpy /usr/bin/scrcpy
 
 # WiFi tools
