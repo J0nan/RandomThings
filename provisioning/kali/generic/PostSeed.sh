@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 1.0.0
+# Version: 1.1.0
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
 
 # Source: https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
 # Regular Colors
-Red='\033[0;31m'		# Red
+Red='\033[0;31m'		  # Red
 Green='\033[0;32m'		# Green
 Yellow='\033[0;33m'		# Yellow
-Blue='\033[0;34m'		# Blue
+Blue='\033[0;34m'		  # Blue
 ColorOff='\033[0m'		# Text Reset
 
 # Setup
@@ -53,6 +53,7 @@ go env -w GOBIN="/opt/go/bin"
 echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/opt/go/bin"' >>/etc/profile
 
 # Docker + docker compose
+echo -e "${Blue}[*] Installing Docker and docker compose${ColorOff}"
 apt remove docker.io docker-compose -y
 apt update
 apt install ca-certificates curl -y
@@ -70,6 +71,7 @@ systemctl disable docker.socket
 usermod -a -G docker kali
 
 # Snapd
+echo -e "${Blue}[*] Installing snapd${ColorOff}"
 apt install snapd -y
 systemctl enable snapd --now
 ln -s /var/lib/snapd/snap /usr/bin/snap
@@ -83,10 +85,29 @@ echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
 apt install dnsutils -y
 
 # Dbeaver
+echo -e "${Blue}[*] Installing Dbeaver${ColorOff}"
 mkdir -p /tmp/Downloads
 wget --no-check-certificate -O /tmp/Downloads/dbeaber-ce.deb https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
 apt install /tmp/Downloads/dbeaber-ce.deb -y
-rm /tmp/Downloads/dbeaber-ce.deb
+rm -r /tmp/Downloads
+
+# VSCodium
+echo -e "${Blue}[*] Installing VSCodium${ColorOff}"
+mkdir -p /tmp/Downloads
+curl -s -k https://api.github.com/repos/VSCodium/vscodium/releases/latest \
+| grep "browser_download_url.*amd64\.deb\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget --no-check-certificate -O /tmp/Downloads/vscodium-amd64.deb -qi -
+apt install /tmp/Downloads/vscodium-amd64.deb -y
+rm -r /tmp/Downloads
+ln -s $(which codium) /usr/bin/code
+
+## IT GETS THE POSTSEED STUCK FOR SOME UNKNOWN REASON
+# LibreOffice
+# echo -e "${Blue}[*] Installing LibreOffice${ColorOff}"
+# apt update
+# apt install libreoffice -y
 
 # Web applications tools
 # Nuclei
@@ -110,7 +131,7 @@ ln -s /.local/share/pipx/venvs/wafw00f/bin/wafw00f /usr/bin/wafw00f
 
 # httpx
 echo -e "${Blue}[*] Installing httpx${ColorOff}"
-apt remove httpx -y
+rm /usr/bin/httpx
 go install github.com/projectdiscovery/httpx/cmd/httpx@latest
 
 # Dirb
@@ -155,6 +176,17 @@ ln -s /opt/corsy/corsy.py /usr/bin/corsy
 # EyeWitness
 echo -e "${Blue}[*] Installing EyeWitness${ColorOff}"
 apt install eyewitness -y
+
+# git-dumper
+echo -e "${Blue}[*] Installing git-dumper${ColorOff}"
+mkdir -p /opt/git-dumper
+curl -s -k https://api.github.com/repos/holly-hacker/git-dumper/releases/latest \
+| grep "browser_download_url.*linux\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget --no-check-certificate -O /opt/git-dumper/git-dumper -qi -
+chmod +x /opt/git-dumper/git-dumper
+ln -s /opt/git-dumper/git-dumper /usr/bin/git-dumper
 
 # Infrastructure tools
 # Onesixtyone (SNMP)
@@ -209,6 +241,21 @@ apt install jadx -y
 # Google Android Tools
 echo -e "${Blue}[*] Installing Google Android Tools${ColorOff}"
 apt install google-android-platform-tools-installer -y
+
+# scrcpy
+echo -e "${Blue}[*] Installing scrcpy${ColorOff}"
+mkdir -p /opt/scrcpy
+curl -s -k https://api.github.com/repos/Genymobile/scrcpy/releases/latest \
+| grep "browser_download_url.*linux\-x86_64.*\"" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| wget --no-check-certificate -O /opt/scrcpy/scrcpy-linux.tar.gz -qi -
+tar -xzf /opt/scrcpy/scrcpy-linux.tar.gz -C /opt/scrcpy
+rm /opt/scrcpy/scrcpy-linux.tar.gz
+mv /opt/scrcpy/scrcpy-linux-x86_64*/* /opt/scrcpy
+rm -r /opt/scrcpy/scrcpy-linux-x86_64*
+chmod +x /opt/scrcpy/scrcpy
+ln -s /opt/scrcpy/scrcpy /usr/bin/scrcpy
 
 # WiFi tools
 # Airgeddon
