@@ -6,13 +6,14 @@
   - [JDownloader 2](#jdownloader-2)
   - [MKVToolNix](#mkvtoolnix)
   - [qBittorrent](#qbittorrent)
+  - [Telegram File Uploader](#telegram-file-uploader)
   - [Telethon Downloader](#telethon-downloader)
   - [TriliumNext Notes](#triliumnext-notes)
   - [Stirling-PDF](#stirling-pdf)
 - [Provisioning](#provisioning)
   - [Kali Linux](#kali-linux)
     - [Generic](#generic)
-- [Web Tools](#web-tools)
+- [Web tools](#web-tools)
   - [CSRF](#csrf)
 
 ## Docker compose files
@@ -36,6 +37,10 @@ Docker compose that implements MKVToolNix. [Info.](./docker-compose%20files/MKVT
 ### qBittorrent
 
 Docker compose that implements qBittorrent docker with VPN. [Info.](./docker-compose%20files/qBittorrent)
+
+### Telegram File Uploader
+
+Docker compose that implements Telegram_file_uploader docker with VPN. [Info.](./docker-compose%20files/Telegram_file_uploader)
 
 ### Telethon Downloader
 

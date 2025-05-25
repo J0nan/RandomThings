@@ -76,6 +76,8 @@ This script is executed by the installer after performing all the configurations
 - [SecList](https://github.com/danielmiessler/SecLists)
 - dnsutils
 - [DBeaver](https://dbeaver.io/)
+- [VSCodium](https://github.com/VSCodium/vscodium) (Added an alias so it can be launch with `code` as well as with `codium`)
+<!-- - [LibreOffice](https://www.libreoffice.org/) -->
 
 ##### Web applications tools
 
@@ -92,7 +94,8 @@ This script is executed by the installer after performing all the configurations
 - ffuf
 - [Bypass-403](https://github.com/iamj0ker/bypass-403)
 - [Corsy](https://github.com/s0md3v/Corsy)
-- eyewitness
+- EyeWitness
+- [git-dumper](https://github.com/holly-hacker/git-dumper)
 
 ##### Infrastructure tools
 
@@ -109,6 +112,7 @@ This script is executed by the installer after performing all the configurations
 
 - jadx
 - google-android-platform-tools-installer
+- [scrcpy](https://github.com/Genymobile/scrcpy)
 
 ##### WiFi tools
 
