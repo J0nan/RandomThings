@@ -30,11 +30,7 @@ jobs:
 
       - name: Append boot entry
         run: |
-          echo '
-label autoinstall
-	menu label ^Auto Install
-	kernel /install.amd/vmlinuz
-	append net.ifnames=0 preseed/file=/cdrom/simple-cdd/default.preseed simple-cdd/profiles=kali,offline desktop=xfce vga=788 initrd=/install.amd/initrd.gz --- quiet url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=' | sudo tee -a /tmp/kaliISO/isolinux/txt.cfg
+          curl -sL https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/txt.cfg | sudo tee -a /tmp/kaliISO/isolinux/txt.cfg
 
       - name: Rebuild ISO
         run: |
