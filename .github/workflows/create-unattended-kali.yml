@@ -1,0 +1,52 @@
+name: Build Unattended Kali ISO
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y wget p7zip-full xorriso genisoimage
+
+      - name: Download latest Kali ISO
+        run: |
+          mkdir -p ~/Downloads
+          ISO_NAME=$(curl -sL https://cdimage.kali.org/current | grep -Eo 'kali-linux-.*-installer-amd64\.iso"' | head -n 1 | cut -d'"' -f1)
+          ISO_URL="https://cdimage.kali.org/current/$(echo $ISO_NAME)"
+          echo "Downloading from $ISO_URL"
+          wget -O ~/Downloads/$ISO_NAME "$ISO_URL"
+
+      - name: Extract ISO contents (no mount)
+        run: |
+          mkdir -p /tmp/iso
+          7z x ~/Downloads/$ISO_NAME -o/tmp/iso
+          mkdir -p /tmp/kaliISO
+          cp -rT /tmp/iso /tmp/kaliISO
+
+      - name: Append boot entry
+        run: |
+          echo '
+label autoinstall
+	menu label ^Auto Install
+	kernel /install.amd/vmlinuz
+	append net.ifnames=0 preseed/file=/cdrom/simple-cdd/default.preseed simple-cdd/profiles=kali,offline desktop=xfce vga=788 initrd=/install.amd/initrd.gz --- quiet url=https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/preseed.cfg language=en country=ES locale=en_US.UTF-8 keymap=es hostname=kali domain=' | sudo tee -a /tmp/kaliISO/isolinux/txt.cfg
+
+      - name: Rebuild ISO
+        run: |
+          xorriso -as mkisofs \
+            -r -V "UNATTENDED_KALI" \
+            -J -l -b isolinux/isolinux.bin \
+            -c isolinux/boot.cat -no-emul-boot \
+            -boot-load-size 4 -boot-info-table \
+            -o /tmp/$ISO_NAME /tmp/kaliISO
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kali-unattended-install.iso
+          path: /tmp/$ISO_NAME
