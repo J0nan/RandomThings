@@ -39,7 +39,7 @@ jobs:
           mkisofs -D -r -V "UNATTENDED_KALI" \
             -cache-inodes -J -l -b isolinux/isolinux.bin \
             -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 \
-            -boot-info-table -o $ISO_NAME /tmp/kaliISO
+            -boot-info-table -o /tmp/$ISO_NAME /tmp/kaliISO
 
       - name: Upload ISO artifact
         uses: actions/upload-artifact@v4
