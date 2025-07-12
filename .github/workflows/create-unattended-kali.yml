@@ -63,23 +63,21 @@ jobs:
           RELEASE_TITLE="Kali Unattended ${KALI_VERSION}"
           UNATTENDED_ISO_NAME="${{ env.UNATTENDED_ISO_NAME }}"
 
-          cat <<EOF > RELEASE_NOTES.txt
-This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}.
-
-Due to GitHub's file size limitations, the ISO has been split into 2GB parts using 7-Zip.
-
-### 🔽 Download & Extract Instructions
-
-1. Download **all** the \`.7z.001`, `.7z.002`, ... files from the release.
-2. Ensure you have [7-Zip](https://www.7-zip.org/) (Windows/Linux/macOS).
-3. Right click on the \`.7z.001\` file and select "Extract", or run:
-
-\`\`\`bash
-7z x ${UNATTENDED_ISO_NAME}.7z.001
-\`\`\`
-
-This will recreate the \`${UNATTENDED_ISO_NAME}\` ISO file.
-EOF
+          echo "This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}." > RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "Due to GitHub's file size limitations, the ISO has been split into 2GB parts using 7-Zip." >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "### 🔽 Download & Extract Instructions" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "1. Download **all** the \`.7z.001\`, \`.7z.002\`, … files from the release." >> RELEASE_NOTES.txt
+          echo "2. Ensure you have [7‑Zip](https://www.7-zip.org/) (Windows/Linux/macOS)." >> RELEASE_NOTES.txt
+          echo "3. Right‑click the \`.7z.001\` file and select “Extract”, or run:" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "\`\`\`bash" >> RELEASE_NOTES.txt
+          echo "7z x ${UNATTENDED_ISO_NAME}.7z.001" >> RELEASE_NOTES.txt
+          echo "\`\`\`" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "This will recreate the \`${UNATTENDED_ISO_NAME}\` ISO file." >> RELEASE_NOTES.txt
 
           echo "Creating GitHub release with tag ${RELEASE_TAG}"
           gh release create "${RELEASE_TAG}" *.7z.* \
