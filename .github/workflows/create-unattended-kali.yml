@@ -62,23 +62,23 @@ jobs:
           RELEASE_TAG="v${KALI_VERSION}"
           RELEASE_TITLE="Kali Unattended ${KALI_VERSION}"
           RELEASE_NOTES=$(cat <<EOF
-This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}.
+            This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}.
 
-Due to GitHub's file size limitations, the ISO has been split into 2GB parts using 7-Zip.
+            Due to GitHub's file size limitations, the ISO has been split into 2GB parts using 7-Zip.
 
-### 🔽 Download & Extract Instructions
+            ### 🔽 Download & Extract Instructions
 
-1. Download **all** the \`.7z.001, .7z.002, ...** files from the release.
-2. Ensure you have [7-Zip](https://www.7-zip.org/) (Windows/Linux/macOS).
-3. Right click on the 7z.001 file and select extract. Or run the following command to extract the full ISO:
+            1. Download **all** the \`.7z.001, .7z.002, ...** files from the release.
+            2. Ensure you have [7-Zip](https://www.7-zip.org/) (Windows/Linux/macOS).
+            3. Right click on the 7z.001 file and select extract. Or r    un the following command to extract the full ISO:
 
-\`\`\`bash
-7z x ${UNATTENDED_ISO_NAME}.7z.001
-\`\`\`
+            \`\`\`bash
+            7z x ${UNATTENDED_ISO_NAME}.7z.001
+            \`\`\`
 
-This will recreate the \`${UNATTENDED_ISO_NAME}\` ISO file.
-EOF
-)
+            This will recreate the \`${UNATTENDED_ISO_NAME}\` ISO file.
+            EOF
+          )
 
           echo "${RELEASE_NOTES}" > RELEASE_NOTES.txt
 
