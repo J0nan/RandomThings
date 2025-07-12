@@ -52,7 +52,7 @@ jobs:
 
       - name: Split ISO into 2GB parts using 7-Zip
         run: |
-          7z a -v2g "${UNATTENDED_ISO_NAME}.7z" "${UNATTENDED_ISO_NAME}"
+          7z a -v1900m "${UNATTENDED_ISO_NAME}.7z" "${UNATTENDED_ISO_NAME}"
 
       - name: Create GitHub Release and Upload Parts
         env:
