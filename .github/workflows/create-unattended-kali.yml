@@ -6,43 +6,60 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Set up dependencies
         run: |
-          sudo apt update
-          sudo apt install -y wget p7zip-full mkisofs genisoimage
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends wget p7zip-full
 
       - name: Download latest Kali ISO
         run: |
-          mkdir -p ~/Downloads
-          ISO_NAME=$(curl -sL https://cdimage.kali.org/current | grep -Eo 'kali-linux-.*-installer-amd64\.iso"' | head -n 1 | cut -d'"' -f1)
-          ISO_URL="https://cdimage.kali.org/current/$(echo $ISO_NAME)"
-          echo "Downloading from $ISO_URL"
-          wget -O ~/Downloads/$ISO_NAME "$ISO_URL"
+          ISO_FILENAME=$(curl -sL https://cdimage.kali.org/current/ | grep -Eo 'kali-linux-.*-installer-amd64\.iso"' | head -n 1 | cut -d'"' -f1)
+          ISO_URL="https://cdimage.kali.org/current/${ISO_FILENAME}"
+          
+          echo "ISO_FILENAME=${ISO_FILENAME}" >> $GITHUB_ENV
+          echo "ISO_URL=${ISO_URL}" >> $GITHUB_ENV
+          
+          echo "Downloading from ${ISO_URL}"
+          wget -q --show-progress -O "${ISO_FILENAME}" "${ISO_URL}"
 
-      - name: Extract ISO contents (no mount)
+      - name: Extract ISO contents
         run: |
-          ISO_NAME=$(curl -sL https://cdimage.kali.org/current | grep -Eo 'kali-linux-.*-installer-amd64\.iso"' | head -n 1 | cut -d'"' -f1)
-          mkdir -p /tmp/iso
-          7z x ~/Downloads/$ISO_NAME -o/tmp/iso
           mkdir -p /tmp/kaliISO
-          cp -rT /tmp/iso /tmp/kaliISO
+          7z x ${{ env.ISO_FILENAME }} -o/tmp/kaliISO
 
       - name: Append boot entry
         run: |
           curl -sL https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/txt.cfg | sudo tee -a /tmp/kaliISO/isolinux/txt.cfg
 
-      - name: Rebuild ISO
+      - name: Rebuild the ISO image
         run: |
-          ISO_NAME=$(curl -sL https://cdimage.kali.org/current | grep -Eo 'kali-linux-.*-installer-amd64\.iso"' | head -n 1 | cut -d'"' -f1)
-          mkisofs -D -r -V "UNATTENDED_KALI" \
+          ORIGINAL_NAME="${ISO_FILENAME%.iso}"
+          UNATTENDED_ISO_NAME="${ORIGINAL_NAME}_unattended-J0nan.iso"
+          echo "UNATTENDED_ISO_NAME=${UNATTENDED_ISO_NAME}" >> $GITHUB_ENV
+
+          sudo mkisofs -D -r -V "UNATTENDED_KALI" \
             -cache-inodes -J -l -b isolinux/isolinux.bin \
             -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 \
-            -boot-info-table -o /tmp/$ISO_NAME /tmp/kaliISO
+            -boot-info-table -o "${UNATTENDED_ISO_NAME}" /tmp/kaliISO
 
-      - name: Upload ISO artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: kali-unattended-install.iso
-          path:  /tmp/kali-linux-*-installer-amd64.iso
+      - name: Create GitHub Release and Upload ISO
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          KALI_VERSION=$(echo "${{ env.ISO_FILENAME }}" | grep -oP '\d{4}\.\d+')
+          RELEASE_TAG="v${KALI_VERSION}"
+
+          echo "Creating GitHub release with tag ${RELEASE_TAG}"
+          
+          gh release create "${RELEASE_TAG}" \
+            "${{ env.UNATTENDED_ISO_NAME }}" \
+            --title "Kali Unattended ${KALI_VERSION}" \
+            --notes "This release contains an automated, unattended installer for Kali Linux version ${KALI_VERSION}."
