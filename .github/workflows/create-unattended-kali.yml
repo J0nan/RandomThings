@@ -17,7 +17,7 @@ jobs:
       - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget p7zip-full mkisofs
+          sudo apt-get install -y wget p7zip-full mkisofs gh
 
       - name: Download latest Kali ISO
         run: |
@@ -50,16 +50,39 @@ jobs:
             -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 \
             -boot-info-table -o "${UNATTENDED_ISO_NAME}" /tmp/kaliISO
 
-      - name: Create GitHub Release and Upload ISO
+      - name: Split ISO into 2GB parts using 7-Zip
+        run: |
+          7z a -v2g "${UNATTENDED_ISO_NAME}.7z" "${UNATTENDED_ISO_NAME}"
+
+      - name: Create GitHub Release and Upload Parts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           KALI_VERSION=$(echo "${{ env.ISO_FILENAME }}" | grep -oP '\d{4}\.\d+')
           RELEASE_TAG="v${KALI_VERSION}"
+          RELEASE_TITLE="Kali Unattended ${KALI_VERSION}"
+          RELEASE_NOTES=$(cat <<EOF
+This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}.
+
+Due to GitHub's file size limitations, the ISO has been split into 2GB parts using 7-Zip.
+
+### 🔽 Download & Extract Instructions
+
+1. Download **all** the \`.7z.001, .7z.002, ...** files from the release.
+2. Ensure you have [7-Zip](https://www.7-zip.org/) (Windows/Linux/macOS).
+3. Right click on the 7z.001 file and select extract. Or run the following command to extract the full ISO:
+
+\`\`\`bash
+7z x ${UNATTENDED_ISO_NAME}.7z.001
+\`\`\`
+
+This will recreate the \`${UNATTENDED_ISO_NAME}\` ISO file.
+EOF
+)
+
+          echo "${RELEASE_NOTES}" > RELEASE_NOTES.txt
 
           echo "Creating GitHub release with tag ${RELEASE_TAG}"
-          
-          gh release create "${RELEASE_TAG}" \
-            "${{ env.UNATTENDED_ISO_NAME }}" \
-            --title "Kali Unattended ${KALI_VERSION}" \
-            --notes "This release contains an automated, unattended installer for Kali Linux version ${KALI_VERSION}."
+          gh release create "${RELEASE_TAG}" *.7z.* \
+            --title "${RELEASE_TITLE}" \
+            --notes-file RELEASE_NOTES.txt
