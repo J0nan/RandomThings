@@ -70,6 +70,13 @@ jobs:
           echo "### 🔽 Download & Extract Instructions" >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
           echo "1. Download **all** the \`.7z.001\`, \`.7z.002\`, … files from the release." >> RELEASE_NOTES.txt
+          echo "\`\`\`bash" >> RELEASE_NOTES.txt
+          echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.001 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.001" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.002 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.002" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.003 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.003" >> RELEASE_NOTES.txt
+          echo "\`\`\`" >> RELEASE_NOTES.txt
           echo "2. Ensure you have [7‑Zip](https://www.7-zip.org/) (Windows/Linux/macOS)." >> RELEASE_NOTES.txt
           echo "3. Right‑click the \`.7z.001\` file and select “Extract”, or run:" >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
