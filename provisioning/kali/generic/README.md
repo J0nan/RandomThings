@@ -28,7 +28,7 @@ This guide is focused in Kali Linux using VirtualBox
 This guide uses a custom ISO made using [GitHub Actions](../../../.github/workflows/create-unattended-kali.yml) and uploaded to the releases of this repository.
 
 1. [Download](https://github.com/J0nan/RandomThings/releases) the modified ISO. Sometimes downloading with the browsers fails, so on the release there will be `curl` commands to download from a terminal.
-2. Decompress the compress file.
+2. Decompress the downloaded files.
 3. Create a new Virtual Machine.
 4. Configure the Hardware, I recommend a minimum of 4096 MB of RAM, 3 CPUs processors and 100 GB of Hard Drive (it can be higher, depending on your hardware).
 5. Before booting the VM, change the display setting to use at least 32 MB of Video memory in order to be able to rescale on bigger screen and with higher resolutions.
