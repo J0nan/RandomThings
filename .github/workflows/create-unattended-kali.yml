@@ -50,7 +50,7 @@ jobs:
             -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 \
             -boot-info-table -o "${UNATTENDED_ISO_NAME}" /tmp/kaliISO
 
-      - name: Split ISO into 2GB parts using 7-Zip
+      - name: Split ISO into 1.86GB parts using 7-Zip
         run: |
           7z a -v1900m "${UNATTENDED_ISO_NAME}.7z" "${UNATTENDED_ISO_NAME}"
 
@@ -65,7 +65,7 @@ jobs:
 
           echo "This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}." > RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
-          echo "Due to GitHub's file size limitations, the ISO has been split into 2GB parts using 7-Zip." >> RELEASE_NOTES.txt
+          echo "Due to GitHub's file size limitations, the ISO has been split into 1.86GB parts using 7-Zip." >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
           echo "### 🔽 Download & Extract Instructions" >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
