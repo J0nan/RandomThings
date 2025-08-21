@@ -65,11 +65,15 @@ jobs:
 
           echo "This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}." > RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
-          echo "Due to GitHub's file size limitations, the ISO has been split into 1.86GB parts using 7-Zip." >> RELEASE_NOTES.txt
+          echo "### Download the ISO from Transfer.it" >> RELEASE_NOTES.txt
+          echo "Because GitHub is not reliable on big downloads, the ISO was uploaded to Transfer.it where it will be available until the **PENDING UPLOAD**." >> RELEASE_NOTES.txt
+          echo "[${UNATTENDED_ISO_NAME}]" >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
           echo "### 🔽 Download & Extract Instructions" >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
-          echo "1. Download **all** the \`.7z.001\`, \`.7z.002\`, … files from the release." >> RELEASE_NOTES.txt
+          echo "Due to GitHub's file size limitations, the ISO has been split into 1.86GB parts using 7-Zip." >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "1. Download **all** the \`.7z.001\`, \`.7z.002\`, … files from the release. This is not that realible, so despite whether you use your browser or the curl commands it can fail, just keep trying." >> RELEASE_NOTES.txt
           echo "\`\`\`bash" >> RELEASE_NOTES.txt
           echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.001 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.001" >> RELEASE_NOTES.txt
           echo "" >> RELEASE_NOTES.txt
