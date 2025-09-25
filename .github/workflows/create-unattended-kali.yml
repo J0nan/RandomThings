@@ -1,0 +1,97 @@
+name: Build Unattended Kali ISO
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget p7zip-full mkisofs gh
+
+      - name: Download latest Kali ISO
+        run: |
+          ISO_FILENAME=$(curl -sL https://cdimage.kali.org/current/ | grep -Eo 'kali-linux-.*-installer-amd64\.iso"' | head -n 1 | cut -d'"' -f1)
+          ISO_URL="https://cdimage.kali.org/current/${ISO_FILENAME}"
+          
+          echo "ISO_FILENAME=${ISO_FILENAME}" >> $GITHUB_ENV
+          echo "ISO_URL=${ISO_URL}" >> $GITHUB_ENV
+          
+          echo "Downloading from ${ISO_URL}"
+          wget -q --show-progress -O "${ISO_FILENAME}" "${ISO_URL}"
+
+      - name: Extract ISO contents
+        run: |
+          mkdir -p /tmp/kaliISO
+          7z x ${{ env.ISO_FILENAME }} -o/tmp/kaliISO
+
+      - name: Append boot entry
+        run: |
+          curl -sL https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/txt.cfg | sudo tee -a /tmp/kaliISO/isolinux/txt.cfg
+
+      - name: Rebuild the ISO image
+        run: |
+          ORIGINAL_NAME="${ISO_FILENAME%.iso}"
+          UNATTENDED_ISO_NAME="${ORIGINAL_NAME}_unattended-J0nan.iso"
+          echo "UNATTENDED_ISO_NAME=${UNATTENDED_ISO_NAME}" >> $GITHUB_ENV
+
+          sudo mkisofs -D -r -V "UNATTENDED_KALI" \
+            -cache-inodes -J -l -b isolinux/isolinux.bin \
+            -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 \
+            -boot-info-table -o "${UNATTENDED_ISO_NAME}" /tmp/kaliISO
+
+      - name: Split ISO into 1.86GB parts using 7-Zip
+        run: |
+          7z a -v1900m "${UNATTENDED_ISO_NAME}.7z" "${UNATTENDED_ISO_NAME}"
+
+      - name: Create GitHub Release and Upload Parts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          KALI_VERSION=$(echo "${{ env.ISO_FILENAME }}" | grep -oP '\d{4}\.\d+')
+          RELEASE_TAG="v${KALI_VERSION}"
+          RELEASE_TITLE="Kali Unattended ${KALI_VERSION}"
+          UNATTENDED_ISO_NAME="${{ env.UNATTENDED_ISO_NAME }}"
+
+          echo "This release contains an **unattended installer** for Kali Linux version ${KALI_VERSION}." > RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "### Download the ISO from Transfer.it" >> RELEASE_NOTES.txt
+          echo "Because GitHub is not reliable on big downloads, the ISO was uploaded to Transfer.it where it will be available until the **PENDING UPLOAD**." >> RELEASE_NOTES.txt
+          echo "[${UNATTENDED_ISO_NAME}]" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "### 🔽 Download & Extract Instructions" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "Due to GitHub's file size limitations, the ISO has been split into 1.86GB parts using 7-Zip." >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "1. Download **all** the \`.7z.001\`, \`.7z.002\`, … files from the release. This is not that realible, so despite whether you use your browser or the curl commands it can fail, just keep trying." >> RELEASE_NOTES.txt
+          echo "\`\`\`bash" >> RELEASE_NOTES.txt
+          echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.001 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.001" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.002 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.002" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "curl -L -o ${UNATTENDED_ISO_NAME}.7z.003 https://github.com/J0nan/RandomThings/releases/download/${RELEASE_TAG}/${UNATTENDED_ISO_NAME}.7z.003" >> RELEASE_NOTES.txt
+          echo "\`\`\`" >> RELEASE_NOTES.txt
+          echo "2. Ensure you have [7‑Zip](https://www.7-zip.org/) (Windows/Linux/macOS)." >> RELEASE_NOTES.txt
+          echo "3. Right‑click the \`.7z.001\` file and select “Extract”, or run:" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "\`\`\`bash" >> RELEASE_NOTES.txt
+          echo "7z x ${UNATTENDED_ISO_NAME}.7z.001" >> RELEASE_NOTES.txt
+          echo "\`\`\`" >> RELEASE_NOTES.txt
+          echo "" >> RELEASE_NOTES.txt
+          echo "This will recreate the \`${UNATTENDED_ISO_NAME}\` ISO file." >> RELEASE_NOTES.txt
+
+          echo "Creating GitHub release with tag ${RELEASE_TAG}"
+          gh release create "${RELEASE_TAG}" *.7z.* \
+            --title "${RELEASE_TITLE}" \
+            --notes-file RELEASE_NOTES.txt
+

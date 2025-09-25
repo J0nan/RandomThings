@@ -16,10 +16,12 @@ As a summary and checklist the following fields highlighted must be changed:
 - [ ] ARL_TOKEN=`DEEZER_ARL_TOKEN`
 - [ ] EMAIL_DEE=`DEEZER_EMAIL`
 - [ ] PWD_DEE=`DEEZER_PASSWORD`
+- [ ] EMAIL_SPO=`SPOTIFY_EMAIL`
+- [ ] PWD_SPO=`SPOTIFY_PASSWORD`
 - [ ] BOT_TOKEN=`TELEGRAM_BOT_TOKEN`
 - [ ] API_ID=`TELEGRAM_API_ID`
 - [ ] API_HASH=`TELEGRAM_API_HASH`
 - [ ] /mnt/`DB_DIR`:/app/DB
-- [ ] /mnt/`CREDENTIALS_DIR`:/app/credentials
+- [ ] /mnt/`LOGS_DIR`:/app/logs
 
-For information regarding how to get some tokens, credentials or options check the repository: <https://github.com/J0nan/DeezSpot_bot_docker/tree/master#how-to-set-spotify-credentials>
+For information regarding how to get some tokens, credentials or options check the repository: <https://github.com/J0nan/DeezSpot_bot_docker?tab=readme-ov-file#where-to-get-some-tokens>
