@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Authors: J0nan / n0t4u
-# Version: 1.1.0
+# Version: 1.2.0
 # Description: Automatic installation of hacking tools on Kali
 
 DEBIAN_FRONTEND=noninteractive
@@ -15,19 +15,6 @@ Blue='\033[0;34m'		  # Blue
 ColorOff='\033[0m'		# Text Reset
 
 # Setup
-# Configuration of the terminal 
-mkdir -p /home/kali/.config/qterminal.org
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal_bookmarks.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal_bookmarks.xml
-chown -R kali:kali /home/kali/.config/qterminal.org
-
-# Power manager XFCE in user kali
-# Disabling power safe, blank screen and switch-off in the monitor
-mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
-wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-power-manager.xml
-chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
-chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
-
 # Change hostname to kali due to vbox changing it
 current_hostname=$(hostname)
 if [ "$current_hostname" == "vbox" ]; then
@@ -36,6 +23,17 @@ if [ "$current_hostname" == "vbox" ]; then
   sed -i 's/vbox/kali/g' /etc/hosts
   echo "kali" | sudo tee /etc/hostname > /dev/null
 fi
+
+# Configuration of the terminal 
+sed -i 's/^TerminalTransparency=.*/TerminalTransparency=0/' /home/kali/.config/qterminal.org/qterminal.ini
+chown -R kali:kali /home/kali/.config/qterminal.org
+
+# Power manager XFCE in user kali
+# Disabling power safe, blank screen and switch-off in the monitor
+mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
+wget --no-check-certificate -O /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/xfce4-power-manager.xml
+chown -R kali:kali /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
+chmod 664 /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
 
 # General purpose tools
 # Python3 and PIP3
@@ -51,6 +49,8 @@ echo -e "${Blue}[*] Installing go and dependencies (BETA)${ColorOff}"
 apt install golang-go -y
 go env -w GOBIN="/opt/go/bin"
 echo -en 'export PATH="$PATH:/usr/local/go/bin:/opt/go/bin"\ngo env -w GOBIN="/opt/go/bin"' >>/etc/profile
+mkdir -p /opt/go/bin
+chown -R kali:kali /opt/go/bin
 
 # Docker + docker compose
 echo -e "${Blue}[*] Installing Docker and docker compose${ColorOff}"
