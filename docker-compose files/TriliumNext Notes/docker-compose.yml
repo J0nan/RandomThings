@@ -1,6 +1,6 @@
 services:
   triliumnext:
-    image: triliumnext/notes:latest
+    image: triliumnext/trilium:latest
     container_name: triliumnext
     environment:
       - USER_ID=568

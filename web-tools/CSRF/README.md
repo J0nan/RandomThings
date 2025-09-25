@@ -4,6 +4,8 @@ This simple HTML, is intended to generate forms to perform CSRF.
 
 It can perform using GET, POST or PUT.
 
+https://j0nan.github.io/RandomThings/web-tools/CSRF/CSRF-PoC.html
+
 ## How it works
 
 ### GET

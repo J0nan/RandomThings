@@ -67,3 +67,14 @@ Kali configuration for unattended installations with some extra tools for day to
 ### CSRF
 
 A simple HTML file that creates PoCs for performing CSRFs. [Info.](./web-tools/CSRF)
+
+## Infra tools
+
+### SSH
+
+A tool to launch ssh-audit to multiple IP:port. [Info.](./infra-tools/SSH/)
+
+### SSL/TLS
+
+A tool to launch testssl to multiple IP:port. [Info.](./infra-tools/SSL-TLS/)
+
