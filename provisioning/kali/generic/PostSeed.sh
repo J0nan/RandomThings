@@ -28,6 +28,10 @@ fi
 sed -i 's/^TerminalTransparency=.*/TerminalTransparency=0/' /home/kali/.config/qterminal.org/qterminal.ini
 chown -R kali:kali /home/kali/.config/qterminal.org
 
+# Change the default terminal to zsh
+chsh -s /bin/zsh root
+chsh -s /bin/zsh kali
+
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
 mkdir -p /home/kali/.config/xfce4/xfconf/xfce-perchannel-xml
