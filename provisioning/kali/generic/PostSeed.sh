@@ -86,7 +86,7 @@ ln -s /var/lib/snapd/snap /usr/bin/snap
 
 # SecLists
 echo -e "${Blue}[*] Downloading dictionaries from SecLists${ColorOff}"
-git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
+# git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
 
 # Dig and Nslookup
 echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
