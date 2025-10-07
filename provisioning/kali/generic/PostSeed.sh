@@ -32,9 +32,9 @@ chown -R kali:kali /home/kali/.config/qterminal.org
 chsh -s /bin/zsh root
 chsh -s /bin/zsh kali
 
-# Add kali user to vboxsf group, needed to access shared folders
-groupadd vboxsf
-usermod -a -G vboxsf kali
+# # Add kali user to vboxsf group, needed to access shared folders
+# groupadd vboxsf
+# usermod -a -G vboxsf kali
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
