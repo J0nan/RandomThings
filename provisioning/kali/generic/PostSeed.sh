@@ -24,8 +24,9 @@ if [ "$current_hostname" == "vbox" ]; then
   echo "kali" | sudo tee /etc/hostname > /dev/null
 fi
 
-# Configuration of the terminal 
-sed -i '/\[General\]/a TerminalTransparency=0' /home/kali/.config/qterminal.org/qterminal.ini
+# Configuration of the terminal
+mkdir -p /home/kali/.config/qterminal.org
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal.ini
 chown -R kali:kali /home/kali/.config/qterminal.org
 
 # Change the default terminal to zsh
@@ -33,8 +34,8 @@ chsh -s /bin/zsh root
 chsh -s /bin/zsh kali
 
 # # Add kali user to vboxsf group, needed to access shared folders
-# groupadd vboxsf
-# usermod -a -G vboxsf kali
+groupadd vboxsf
+usermod -a -G vboxsf kali
 
 # Power manager XFCE in user kali
 # Disabling power safe, blank screen and switch-off in the monitor
