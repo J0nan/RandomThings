@@ -26,7 +26,7 @@ fi
 
 # Configuration of the terminal
 mkdir -p /home/kali/.config/qterminal.org
-wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/develop/provisioning/kali/generic/qterminal.ini
+wget --no-check-certificate -O /home/kali/.config/qterminal.org/qterminal.ini https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/provisioning/kali/generic/qterminal.ini
 chown -R kali:kali /home/kali/.config/qterminal.org
 
 # Change the default terminal to zsh
@@ -87,7 +87,7 @@ ln -s /var/lib/snapd/snap /usr/bin/snap
 
 # SecLists
 echo -e "${Blue}[*] Downloading dictionaries from SecLists${ColorOff}"
-# git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
+git clone https://github.com/danielmiessler/SecLists.git /opt/SecLists
 
 # Dig and Nslookup
 echo -e "${Blue}[*] Installing dnsutils (dig, nslookup)${ColorOff}"
