@@ -32,12 +32,14 @@ Clone the Repository or download the `check_mfp.sh`
 git clone https://github.com/J0nan/RandomThings.git
 cd RandomThings/infra-tools/Wi-Fi/CheckMFP
 chmod +x check_mfp.sh
+# sudo ln -s "$PWD/check_mfp.sh" /usr/bin/check_mfp # To create a symbolic link in order to be called as check_mfp
 ```
 
 ### Downloading the script
 
 ```bash
 curl -L -o check_mfp.sh https://raw.githubusercontent.com/J0nan/RandomThings/refs/heads/main/infra-tools/Wi-Fi/CheckMFP/check_mfp.sh && chmod +x check_mfp.sh
+# sudo ln -s "$PWD/check_mfp.sh" /usr/bin/check_mfp # To create a symbolic link in order to be called as check_mfp
 ```
 
 ## Usage
