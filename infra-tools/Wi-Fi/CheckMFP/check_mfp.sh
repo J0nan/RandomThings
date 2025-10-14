@@ -57,9 +57,9 @@ echo "$SCAN_OUTPUT" | awk -v format="$FORMAT" '
             count++;
         } else {
             printf "BSSID: %s\nSSID: %s\n", bssid, ssid;
-            if (mfp == "required")
+            if (mfp == "Required")
                 print "  MFP: REQUIRED (802.11w enforced)";
-            else if (mfp == "optional")
+            else if (mfp == "Optional")
                 print "  MFP: OPTIONAL (802.11w supported)";
             else
                 print "  MFP: Not supported";
@@ -90,9 +90,9 @@ END {
             printf "  {\"BSSID\": \"%s\", \"SSID\": \"%s\", \"MFP_Status\": \"%s\"}\n]", bssid, ssid, (mfp==""?"Not supported":mfp);
         } else {
             printf "BSSID: %s\nSSID: %s\n", bssid, ssid;
-            if (mfp == "required")
+            if (mfp == "Required")
                 print "  MFP: REQUIRED (802.11w enforced)";
-            else if (mfp == "optional")
+            else if (mfp == "Optional")
                 print "  MFP: OPTIONAL (802.11w supported)";
             else
                 print "  MFP: Not supported";
