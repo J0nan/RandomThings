@@ -29,7 +29,7 @@ Clone the Repository or download the `check_mfp.sh`
 ### Cloning the Repository
 
 ```bash
-git clone
+git clone https://github.com/J0nan/RandomThings.git
 cd RandomThings/infra-tools/Wi-Fi/CheckMFP
 chmod +x check_mfp.sh
 ```
