@@ -27,7 +27,10 @@ if ! iw dev "$IFACE" info &>/dev/null; then
     exit 1
 fi
 
-echo "Scanning Wi-Fi networks on interface: $IFACE..."
+if [ -n "$FORMAT" ]; then
+    echo "Scanning Wi-Fi networks on interface: $IFACE..."
+fi
+
 SCAN_OUTPUT=$(iw dev "$IFACE" scan 2>/dev/null)
 
 if [ -z "$SCAN_OUTPUT" ]; then
