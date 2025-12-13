@@ -1,21 +1,10 @@
 # RandomThings <!-- omit in toc -->
 
-- [Provisioning](#provisioning)
-  - [Kali Linux](#kali-linux)
-    - [Generic](#generic)
 - [Web tools](#web-tools)
   - [CSRF](#csrf)
 - [Infra tools](#infra-tools)
   - [SSH](#ssh)
   - [SSL/TLS](#ssltls)
-
-## Provisioning
-
-### Kali Linux
-
-#### Generic
-
-Kali configuration for unattended installations with some extra tools for day to day use. [Info.](./provisioning/kali/generic)
 
 ## Web tools
 
